@@ -1,0 +1,41 @@
+@import '~@angular/material/theming';
+
+@mixin mat-card-override-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-card {
+    @include _mat-theme-overridable-elevation(1, $theme);
+    //background: mat-color($background, card);
+    background: mat-color($background, dialog);
+    color: mat-color($foreground, text);
+
+    // Needs extra specificity to be able to override the elevation selectors.
+    &.mat-card-flat {
+      @include _mat-theme-overridable-elevation(0, $theme);
+    }
+
+    &:hover {
+      @include _mat-theme-overridable-elevation(10, $theme);
+    }
+  }
+
+  .mat-card-subtitle {
+    color: mat-color($foreground, secondary-text);
+  }
+}
+
+@mixin mat-card-override-class() {
+  .mat-card.mat-card-override {
+    background:rgba(255, 172, 172, 0.849);
+    color:white;
+
+    &:hover {
+      @include mat-elevation(20, #e91e63, 0.8);
+    }
+
+    .mat-card-subtitle {
+      color: rgb(137, 137, 247);
+    }
+  }
+}

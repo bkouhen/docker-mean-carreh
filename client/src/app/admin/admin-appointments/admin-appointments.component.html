@@ -1,0 +1,60 @@
+<div class="expansion-container">
+  <div style="width: 100%; text-align: center">
+    <button style="margin: 2rem auto" color="primary" mat-raised-button type="button" (click)="displayAppointments = !displayAppointments">{{displayAppointments ? 'Cacher les RDV utilisateurs' : 'Afficher les RDV utilisateurs'}}</button>
+  </div>
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <mat-accordion *ngIf="filteredAppointments.length > 0 && !isLoading && displayAppointments">
+    <mat-expansion-panel *ngFor="let appointment of filteredAppointments" [hideToggle]="appointment.readStatus === 0" (click)="updateAppointmentReadStatus(appointment, appointment._id)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{appointment.email}}</mat-panel-title>
+        <mat-panel-description style="display: flex; justify-content: space-between;">
+          {{appointment.date | date: 'dd/MM/yyyy'}} {{appointment.time.hours}}:{{appointment.time.minutes === 0 ? '00' : appointment.time.minutes}}
+          <mat-icon color="warn" *ngIf="appointment.readStatus === 0" style="user-select: none;">notifications</mat-icon>
+          <mat-icon *ngIf="appointment.read && appointment.read === 1" style="user-select: none;">done</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="section">
+        <strong><p class="section_title">Date du rendez-vous :</p></strong>
+        <p>{{appointment.date | date: 'dd/MM/yyyy'}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Heure du rendez-vous :</p></strong>
+        <p>{{appointment.time.hours}}h{{appointment.time.minutes === 0 ? '00' : appointment.time.minutes}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Service :</p></strong>
+        <p>{{appointment.service}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Prénom :</p></strong>
+        <p>{{appointment.firstName}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Nom :</p></strong>
+        <p>{{appointment.lastName}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">N° de téléphone :</p></strong>
+        <p>{{appointment.phoneNumber}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Utilisateur inscrit :</p></strong>
+        <p>{{appointment.userId ? 'Oui' : 'Non'}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div style="width: 100%; text-align: center">
+    <p *ngIf="filteredAppointments.length <= 0 && !isLoading && displayAppointments" class="info-text">Aucun rendez-vous trouvé</p>
+  </div>
+  <div class="calendar" *ngIf="!isLoading">
+<!--     <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker [opened]="true"></mat-datepicker>
+    </mat-form-field> -->
+    <div class="calendar-wrapper mat-elevation-z5">
+      <mat-calendar #calendar [(selected)]="selectedDate" [dateClass]="dateClass()" (selectedChange)="onChangeDate($event)" [minDate]="minDate" [maxDate]="maxDate" [dateFilter]="dateFilter"></mat-calendar>
+  </div>
+  </div>
+</div>

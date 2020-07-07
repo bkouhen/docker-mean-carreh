@@ -1,0 +1,221 @@
+.header {
+  height: 3rem;
+  position: relative;
+  display: none;
+
+  & app-bottom-header {
+    display: none;
+  }
+}
+
+mat-progress-bar {
+  width: 80%;
+  margin: 2rem 0;
+}
+
+.filter_block {
+  margin: auto;
+  width: 70%;
+  padding-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & mat-form-field {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.cards-container {
+    width: 100vw;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+  & .cards_block {
+    width: 100%;
+    margin: 0 auto;
+
+    & mat-card {
+      width: 100%;
+      padding: 1rem;
+      margin: 2rem auto;
+      user-select: none;
+      position: relative;
+
+      & .price_block {
+        position: absolute;
+        bottom:0.5rem;
+        right:0.5rem;
+        border-radius: 4px;
+        color: white;
+        padding: 0.2rem 0.8rem;
+        font-size: 0.8rem;
+        background-color: #d29755;
+        text-align: center;
+
+      }
+
+      & .image_block {
+        width: calc(100% + 2rem);
+        height: auto;
+        margin: 0 -1rem 1rem -1rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+
+      & img {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      & mat-card-actions {
+        padding: 0.5rem 0 0 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        & p {
+          margin: 0;
+        }
+      }
+
+    }
+  }
+}
+
+@media (max-width: 21rem) {
+  .cards-container {
+    & .cards_block {
+      & mat-card {
+        & .price_block {
+          position: relative;
+          width: 100%;
+          display: inline-block;
+          top: unset;
+          right: unset;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 30rem) {
+  .cards-container {
+    & .cards_block {
+      width: 90%;
+
+      & mat-card {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@media (min-width: 48rem) {
+  .header {
+    display: flex;
+
+    & app-bottom-header {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .filter_block {
+    width: 25%;
+  }
+
+  .cards-container {
+    & .cards_block {
+      display: flex;
+      flex-flow: wrap;
+
+      & mat-card {
+        flex: 1 0 48%;
+        margin: 1rem 1%;
+
+        & mat-card-actions {
+          flex-direction: row;
+          justify-content: flex-start;
+        }
+
+        &:nth-last-of-type(2n+1) {
+          flex-grow: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 64rem) {
+  .cards-container {
+    & .cards_block {
+      & mat-card {
+        flex: 1 0 31%;
+        margin: 1rem 1%;
+
+        &:nth-last-of-type(2n+1) {
+          flex-grow: 1;
+        }
+
+        &:nth-last-of-type(3n+1),&:nth-last-of-type(3n+2),&:nth-last-of-type(2):nth-child(3n+2) {
+          flex-grow: 0;
+        }
+
+      }
+    }
+  }
+}
+
+@media (min-width: 80rem) {
+  .cards-container {
+    & .cards_block {
+      & mat-card {
+        flex: 1 0 23%;
+        margin: 1rem 1%;
+
+        &:nth-last-of-type(3n+1),
+        &:nth-last-of-type(3n+2),&:nth-last-of-type(2):nth-child(3n+2) {
+          flex-grow: 1;
+        }
+
+        &:nth-last-of-type(4n+1),
+        &:nth-last-of-type(4n+2),&:nth-last-of-type(2):nth-child(4n+1),
+        &:nth-last-of-type(4n+3),&:nth-last-of-type(2):nth-child(4n+2),&:nth-last-of-type(3):nth-child(4n+1) {
+          flex-grow: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 96rem) {
+  .cards-container {
+    & .cards_block {
+      & mat-card {
+        flex: 1 0 18%;
+        margin: 1rem 1%;
+
+        &:nth-last-of-type(4n+1),
+        &:nth-last-of-type(4n+2),&:nth-last-of-type(2):nth-child(4n+1),
+        &:nth-last-of-type(4n+3),&:nth-last-of-type(2):nth-child(4n+2),&:nth-last-of-type(3):nth-child(4n+1) {
+          flex-grow: 1;
+        }
+
+        &:nth-last-of-type(5n+1),
+        &:nth-last-of-type(5n+2),&:nth-last-of-type(2):nth-child(5n+1),
+        &:nth-last-of-type(5n+3),&:nth-last-of-type(2):nth-child(5n+2),&:nth-last-of-type(3):nth-child(5n+1),
+        &:nth-last-of-type(5n+4),&:nth-last-of-type(2):nth-child(5n+3),&:nth-last-of-type(3):nth-child(5n+2),&:nth-last-of-type(4):nth-child(5n+1) {
+          flex-grow: 0;
+        }
+      }
+    }
+  }
+}

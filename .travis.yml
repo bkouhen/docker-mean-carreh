@@ -1,0 +1,34 @@
+language: generic
+
+services:
+  - docker
+
+# before_install:
+#   - docker image build -t bkouhen/multi-container-client-test -f ./client/Dockerfile.dev ./client
+
+# script:
+#   - docker run bkouhen/multi-container-client-test npm run test:ci
+#   - docker run bkouhen/multi-container-client-test npm run e2e:ci
+
+# after_success:
+script:
+  - docker image build -t bkouhen/docker-mean-client ./client
+  - docker image build -t bkouhen/docker-mean-api ./backend
+  - docker image build -t bkouhen/docker-mean-nginx ./nginx
+  - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bkouhen/docker-mean-client
+  - docker push bkouhen/docker-mean-api
+  - docker push bkouhen/docker-mean-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-3"
+  app: "docker-mean-carreh"
+  env: "DockerMeanCarreh-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-804229121763"
+  bucket_path: "docker-mean-carreh"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+

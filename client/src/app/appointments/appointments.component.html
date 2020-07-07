@@ -1,0 +1,123 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<div class="card_block" [@flyIn]>
+  <mat-card class="mat-elevation-z5" *ngIf="isAuthenticated || displayCard">
+    <div class="dates" *ngIf="!anonymousMode && isAuthenticated">
+      <h1>Vos rendez-vous planifiés</h1>
+      <p *ngIf="myAppointments.length === 0 && !initLoading">Aucun rendez-vous planifié à ce jour</p>
+      <mat-progress-bar mode="indeterminate" color="primary" *ngIf="initLoading"></mat-progress-bar>
+      <div *ngIf="myAppointments.length > 0 && !initLoading">
+        <mat-card class="mat-elevation-z5" *ngFor="let rdv of myAppointments" style="margin: 1rem auto;">
+          <p>Date : {{rdv.date | date: 'dd/MM/yyyy'}}</p>
+          <p>Heure : {{rdv.time.hours}}h{{rdv.time.minutes === 0 ? '00' : rdv.time.minutes}}</p>
+          <p>Service : {{rdv.service}}</p>
+        </mat-card>
+      </div>
+    </div>
+    <mat-divider *ngIf="newAppointment && isAuthenticated"></mat-divider>
+    <mat-spinner *ngIf="isLoading && newAppointment"></mat-spinner>
+    <div class="calendar" *ngIf="!isLoading && newAppointment" [@flyIn]>
+      <h1>Nouveau rendez-vous</h1>
+      <p>Veuillez choisir une date et un horaire</p>
+      <button mat-raised-button color="primary" type="button" (click)="picker.open()">{{datePicked ? 'Modifier la date' : 'Choisir une date'}}</button>
+      <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter"
+        placeholder="Date" disabled [min]="minDate" [max]="maxDate"
+        (dateChange)="onChangeDate($event.value)"
+        >
+        <mat-datepicker #picker disabled="false" touchUi></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field *ngIf="datePicked && filteredHours">
+        <mat-label>Heure</mat-label>
+        <mat-select [(value)]="appointmentTime" (selectionChange)="onHourChange($event)">
+          <mat-option *ngFor="let time of filteredHours" [value]="time">{{time.hours}}h{{time.minutes === 0 ? '00' : time.minutes}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="datePicked && filteredHours && appointmentTime">
+        <mat-label>Service</mat-label>
+        <mat-select [(value)]="serviceSelected" (selectionChange)="onServiceChange($event)">
+          <mat-option *ngFor="let service of services" [value]="service">{{service}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button *ngIf="datePicked && filteredHours && appointmentTime && serviceSelected && !anonymousMode" mat-raised-button color="primary" type="button" (click)="onSubmitAppointment()">Confirmer le RDV</button>
+    </div>
+  </mat-card>
+  <div style="width: 100%; text-align: center;">
+    <button style="margin:2rem auto;" mat-raised-button type="button" color="primary" (click)="newAppointment = true; displayCard = true" *ngIf="!newAppointment" [@flyIn]>Nouveau rendez-vous</button>
+  </div>
+</div>
+
+<div class="card_block" *ngIf="anonymousMode && !isLoading" [@flyIn]>
+  <div class="info_block" *ngIf="displayInfo">
+    <p>Merci de bien vouloir renseigner ces informations pour enregistrer votre rendez-vous</p>
+    <button mat-icon-button class="clear_button" (click)="displayInfo = false">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <div class="form_block mat-elevation-z5">
+    <form (ngSubmit)="onConfirmAnonAppointment()" [formGroup]="infoForm">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+        matInput
+        type="email"
+        placeholder="Email"
+        required
+        email
+        formControlName="email"
+        >
+        <mat-icon matSuffix *ngIf="infoForm.get('email').valid">done</mat-icon>
+        <mat-error *ngIf="infoForm.get('email').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        <mat-error *ngIf="infoForm.get('email').hasError('email') && !infoForm.get('email').hasError('required')">Veuillez entrer un email <strong>valide</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input
+        matInput
+        type="text"
+        placeholder="Prénom"
+        required
+        formControlName="firstName"
+        >
+        <mat-icon matSuffix *ngIf="infoForm.get('firstName').valid">done</mat-icon>
+        <mat-error *ngIf="infoForm.get('firstName').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input
+        matInput
+        type="text"
+        placeholder="Nom"
+        formControlName="lastName"
+        required
+        >
+        <mat-icon matSuffix *ngIf="infoForm.get('lastName').valid">done</mat-icon>
+        <mat-error *ngIf="infoForm.get('lastName').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Téléphone</mat-label>
+        <input
+        matInput
+        type="text"
+        maxlength=14
+        placeholder="06 61 56 22 04"
+        formControlName="phoneNumber"
+        required
+        >
+        <mat-icon matSuffix *ngIf="infoForm.get('phoneNumber').valid">done</mat-icon>
+        <mat-error *ngIf="infoForm.get('phoneNumber').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        <mat-error *ngIf="infoForm.get('phoneNumber').hasError('invalidPhoneNumber') && !infoForm.get('phoneNumber').hasError('required')">Veuillez saisir un numéro <strong>valide</strong></mat-error>
+      </mat-form-field>
+      <div class="buttons">
+        <button [disabled]="!infoForm.valid" mat-raised-button color="primary" type="submit">Confirmer le RDV</button>
+      </div>
+    </form>
+  </div>
+</div>
+

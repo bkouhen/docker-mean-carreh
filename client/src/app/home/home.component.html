@@ -1,0 +1,134 @@
+<section id="carousel">
+  <app-bottom-header></app-bottom-header>
+  <div class="cl-1" *ngIf="carouselIndex === 0 && bg1 && bg1 !== 'null' && bg2 && bg3" [@carouselFadeIn] [@carouselFadeOut] [ngStyle]="{'background-image': 'url(' + bg1 + ')'}"></div>
+  <div class="cl-2" *ngIf="carouselIndex === 1 && bg1 && bg2 && bg2 !== 'null' && bg3" [@carouselFadeIn] [@carouselFadeOut] [ngStyle]="{'background-image': 'url(' + bg2 + ')'}"></div>
+  <div class="cl-3" *ngIf="carouselIndex === 2 && bg1 && bg2 && bg3 && bg3 !== 'null'" [@carouselFadeIn] [@carouselFadeOut] [ngStyle]="{'background-image': 'url(' + bg3 + ')'}"></div>
+  <button type="button" mat-mini-fab class="carousel-button__next" (click)="carouselNext()" *ngIf="bg1 && bg2 && bg3">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+  <button type="button" mat-mini-fab class="carousel-button__previous" (click)="carouselPrevious()" *ngIf="bg1 && bg2 && bg3">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <div class="carousel-round-buttons" *ngIf="bg1 && bg2 && bg3">
+    <div class="carousel-round-button mat-elevation-z5" (click)="switchCarousel(0)"></div>
+    <div class="carousel-round-button mat-elevation-z5" (click)="switchCarousel(1)"></div>
+    <div class="carousel-round-button mat-elevation-z5" (click)="switchCarousel(2)"></div>
+  </div>
+</section>
+
+<div class="discover-button">
+  <a href="#presentation" class="btn-disc-link">
+    <div class="btn-disc mat-elevation-z5">
+      Découvrir nos produits
+    </div>
+  </a>
+  <mat-icon class="icon-discover">keyboard_arrow_down</mat-icon>
+</div>
+
+<section id="presentation">
+  <div class="presentation-container mat-elevation-z5">
+    <div class="presentation-img">
+    </div>
+    <div class="presentation-content">
+      <h1>Bienvenue chez Carre H Spa</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariat</p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="services-container mat-elevation-z5">
+    <h1>Nos services</h1>
+    <div class="services-content">
+      <div class="key-feature">
+        <div class="key-feature__image">
+          <svg id="Layer_1_1_" enable-background="new 0 0 64 64" height="80" viewBox="0 0 64 64" width="80" xmlns="http://www.w3.org/2000/svg"><g><path d="m22 54c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8-8 3.582-8 8zm3 0c0-2.761 2.239-5 5-5s5 2.239 5 5-2.239 5-5 5-5-2.239-5-5z" fill="#ffffff"/><path d="m18 62h-11c-2.761 0-5-2.239-5-5v-37c0-2.761 2.239-5 5-5h11v4h-10c-1.105 0-2 .895-2 2v35c0 1.105.895 2 2 2h10z" fill="#ffffff"/><path d="m54 46c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 13c-2.761 0-5-2.239-5-5s2.239-5 5-5 5 2.239 5 5-2.239 5-5 5z" fill="#ffffff"/><g fill="#d29755"><path d="m7 63h11c.553 0 1-.448 1-1v-4c0-.552-.447-1-1-1h-10c-.552 0-1-.449-1-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12v-1h12v-2h-12c0-.551.448-1 1-1h10c.553 0 1-.448 1-1v-4c0-.552-.447-1-1-1h-11c-3.309 0-6 2.691-6 6v37c0 3.309 2.691 6 6 6zm-4-43c0-2.206 1.794-4 4-4h10v2h-9c-1.654 0-3 1.346-3 3v35c0 1.654 1.346 3 3 3h9v2h-10c-2.206 0-4-1.794-4-4z"/><path d="m54 60c3.309 0 6-2.691 6-6s-2.691-6-6-6-6 2.691-6 6 2.691 6 6 6zm0-10c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4z"/><path d="m30 60c3.309 0 6-2.691 6-6s-2.691-6-6-6-6 2.691-6 6 2.691 6 6 6zm0-10c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4z"/><path d="m30 63c4.963 0 9-4.038 9-9 0-2.237-.851-4.405-2.354-6.056l2.841-5.68c.532-1.064 1.424-1.859 2.515-2.303 1.058.432 1.971 1.222 2.512 2.303l2.841 5.68c-1.504 1.651-2.355 3.819-2.355 6.056 0 4.962 4.037 9 9 9s9-4.038 9-9c0-5.259-4.548-9.521-9.896-8.953l-5.191-10.165 7.064-32.671c.106-.491-.169-.985-.642-1.153-.47-.167-.998.04-1.227.487l-11.108 21.756-11.109-21.756c-.228-.449-.757-.655-1.227-.487-.473.169-.748.662-.642 1.153l7.064 32.671-5.191 10.165c-5.351-.568-9.895 3.694-9.895 8.953 0 4.962 4.037 9 9 9zm21.401-53.711-4.925 22.778-3.353-6.567zm.247 37.305c.2.393.636.608 1.072.529.448-.083.866-.123 1.28-.123 3.859 0 7 3.14 7 7s-3.141 7-7 7-7-3.14-7-7c0-1.963.799-3.785 2.249-5.129.326-.302.413-.783.215-1.181l-3.161-6.321c-1.187-2.373-3.629-3.781-6.161-3.781-.464 0-.93.047-1.393.144l-6.15-28.444zm-21.648.406c.414 0 .832.04 1.279.123.432.079.871-.134 1.072-.529l4.403-8.622.268 1.24c.062.288.248.533.508.671.261.138.567.153.841.046.131-.052.266-.076.399-.116-.421.462-.785.982-1.073 1.557l-3.161 6.321c-.198.397-.111.878.215 1.181 1.45 1.343 2.249 3.165 2.249 5.128 0 3.86-3.141 7-7 7s-7-3.14-7-7 3.141-7 7-7z"/><path d="m41 34h2v2h-2z"/></g></g></svg>
+          <h3>Coiffure</h3>
+        </div>
+        <div class="key-feature__image">
+          <svg id="Layer_1" enable-background="new 0 0 512 512" height="80" viewBox="0 0 512 512" width="80" xmlns="http://www.w3.org/2000/svg"><g><path d="m111.4 94.267h112.466c8.284 0 15-6.716 15-15s-6.716-15-15-15h-112.466c-9.393 0-17.134-7.577-17.134-17.149.001-9.439 7.679-17.118 17.134-17.118 8.284 0 14.992-6.716 14.992-15s-6.724-15-15.008-15c-25.981 0-47.117 21.137-47.117 47.133 0 26.023 21.037 47.134 47.133 47.134z" fill="#d29755"/><path d="m273.134 79.267c0 8.284 6.716 15 15 15h112.466c9.307 0 17.134 7.538 17.134 17.133 0 9.447-7.687 17.133-17.134 17.133h-112.483c-25.98 0-47.117 21.137-47.117 47.133 0 8.284 6.716 14.992 15 14.992s15-6.724 15-15.008c0-9.438 7.679-17.117 17.117-17.117h112.483c25.989 0 47.134-21.144 47.134-47.133 0-26.439-21.543-47.133-47.134-47.133h-112.466c-8.284 0-15 6.715-15 15z" fill="#d29755"/><path d="m175.667 30h160.666c8.284 0 15-6.716 15-15s-6.716-15-15-15h-160.666c-8.284 0-15 6.716-15 15s6.716 15 15 15z" fill="#d29755"/><path d="m368.459 289.2c-30.938 0-57.79-20.967-65.295-50.966l-.455-1.845c-1.635-6.723-7.656-11.456-14.575-11.456h-64.268c-6.859 0-12.845 4.654-14.537 11.302 0 0-.183.719-.496 1.979-7.51 30.02-34.362 50.987-65.3 50.987h-.016c-61.521 0-111.384 49.766-111.384 111.4 0 61.426 49.974 111.4 111.399 111.4h224.934c61.426 0 111.399-49.99 111.399-111.416.001-61.51-49.768-111.385-111.406-111.385zm-224.941 30h.016c41.401 0 77.741-25.968 91.531-64.267h41.861c13.781 38.29 50.128 64.267 91.557 64.267 37.101 0 72.55 26.084 80.014 66.4h-384.995c9.79-52.909 58.093-66.4 80.016-66.4zm224.949 162.8h-224.934c-39.761 0-72.955-28.656-80.014-66.4h384.961c-7.058 37.744-40.252 66.4-80.013 66.4z" fill="#d29755"/></g></svg>
+          <h3>Relaxation</h3>
+        </div>
+        <div class="key-feature__image">
+          <svg id="Capa_1" enable-background="new 0 0 512.131 512.131" height="80" viewBox="0 0 512.131 512.131" width="80" xmlns="http://www.w3.org/2000/svg"><g><path d="m326.293 497.131h-78.659c-9.705 0-17.602-7.896-17.602-17.602v-56.993h75.41c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-83.048c-3.866 0-7.063-3.023-7.274-6.853l-15.997-311.002c-.063-1.205-.414-2.378-1.026-3.418l-23.934-40.678h234.233l-20.857 35.448c-2.101 3.57-.909 8.167 2.66 10.267 3.572 2.101 8.167.91 10.268-2.661l27.508-46.751c.679-1.153 1.036-2.466 1.036-3.803v-25.17c0-7.122-5.794-12.915-12.916-12.915h-249.631c-7.122 0-12.916 5.793-12.916 12.915v25.169c0 1.337.357 2.65 1.036 3.803l29.653 50.398 15.904 309.198c.511 9.229 6.608 16.872 14.891 19.778v58.267c0 17.977 14.625 32.602 32.602 32.602h78.659c4.143 0 7.5-3.358 7.5-7.5s-3.358-7.499-7.5-7.499zm87.718-482.131v15.584h-245.463v-15.584z" fill="#d29755"/><path d="m450.541 112.551c-3.104-3.314-7.49-5.215-12.032-5.215h-113.225c-4.542 0-8.928 1.901-12.033 5.216s-4.717 7.816-4.421 12.35l14.029 214.598c.271 4.133 3.83 7.27 7.974 6.995 4.133-.27 7.265-3.84 6.995-7.973l-11.622-177.78h111.382l-16.184 247.548c-.548 8.387-7.562 14.957-15.967 14.957h-47.082c-8.405 0-15.419-6.57-15.967-14.957l-2.472-37.806c-.271-4.134-3.869-7.271-7.974-6.995-4.134.27-7.265 3.84-6.995 7.973l2.472 37.806c.779 11.919 8.302 21.937 18.681 26.433v53.533c0 12.625 10.271 22.896 22.896 22.896h25.8c12.625 0 22.896-10.271 22.896-22.896v-53.533c10.379-4.497 17.901-14.514 18.681-26.433l18.591-284.369c.295-4.533-1.317-9.034-4.423-12.348zm-47.849 376.683c0 4.354-3.542 7.896-7.896 7.896h-25.8c-4.354 0-7.896-3.542-7.896-7.896v-50.987h41.592zm-77.467-343.493-1.426-21.819c-.035-.533.197-.901.399-1.116.201-.215.553-.471 1.086-.471h113.225c.533 0 .885.256 1.087.471.201.215.435.583.399 1.116l-1.427 21.819z" fill="#d29755"/><path d="m168.548 343.494v-59.467c0-8.18-6.654-14.834-14.833-14.834h-.659v-12.632c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v12.632h-40.075v-49.524c16.985-7.649 30.652-21.008 38.747-37.51.877 6.304 1.327 12.69 1.327 19.143v23.297c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-23.297c0-21.842-4.555-43.013-13.537-62.927-2.438-5.403-7.398-9.119-13.271-9.938-5.873-.823-11.66 1.394-15.484 5.923l-10.907 12.915c-10.882 12.884-16.875 29.266-16.875 46.129v75.79h-.658c-8.18 0-14.834 6.654-14.834 14.834v59.467c-6.03 2.195-10.355 7.968-10.355 14.748v27.11c0 .006-.001.013-.001.019s.001.013.001.019v29.374c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-21.894h91.771v83.864c0 11.245-9.149 20.394-20.395 20.394h-50.983c-11.245 0-20.394-9.149-20.394-20.394v-30.008c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v30.008c0 19.516 15.878 35.394 35.394 35.394h50.982c19.517 0 35.395-15.878 35.395-35.394v-118.492c0-6.78-4.326-12.554-10.356-14.749zm-57.233-186.541 10.907-12.915c.67-.792 1.511-.809 1.951-.746.441.062 1.245.306 1.672 1.251 1.5 3.325 2.861 6.69 4.086 10.089l-1.957 7.962c-4.178 17.003-15.119 31.451-29.994 40.192v-9.384c.001-13.323 4.737-26.269 13.335-36.449zm-28.826 127.24h71.059v58.342h-71.059zm-10.355 93.679v-19.629c0-.39.316-.707.706-.707h2.149 86.059 2.149c.39 0 .707.317.707.707v19.629z" fill="#d29755"/></g></svg>
+          <h3>Esthétique</h3>
+        </div>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariat</p>
+    </div>
+  </div>
+</section>
+
+<section id="findus">
+  <div class="findus-container mat-elevation-z5">
+    <h1>Où nous trouver ?</h1>
+    <div class="findus-content">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3325.9883104345645!2d-7.616077848730629!3d33.52768955254168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda62d7d21a1c751%3A0xb80dd4c2784e06f9!2sCARRE%20H!5e0!3m2!1sen!2sfr!4v1590801041289!5m2!1sfr!2sfr" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      <div class="coords-container">
+        <h3>Coordonnées</h3>
+        <div class="coords">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListIcon>room</mat-icon>
+              <h3>Quartier Jnane Californie</h3>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>local_phone</mat-icon>
+              <h3>05.22.52.12.06</h3>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>local_phone</mat-icon>
+              <h3>07.00.08.62.06</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-container mat-elevation-z5">
+    <h1>Contact</h1>
+    <div class="contact-content">
+      <form [formGroup]="contactForm" (ngSubmit)="submitContactForm()">
+        <div class="user-info__block">
+          <mat-form-field appearance="fill">
+            <mat-label>Nom</mat-label>
+            <input type="text" matInput placeholder="Nom" required formControlName="name">
+            <mat-error *ngIf="!contactForm.get('name').valid && contactForm.get('name').touched">Champ <strong>requis</strong></mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Email" required formControlName="email">
+            <mat-error *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched">Champ <strong>requis</strong></mat-error>
+          </mat-form-field>
+        </div>
+        <div class="message__block">
+          <mat-form-field appearance="fill">
+            <mat-label>Message</mat-label>
+            <textarea id=""rows="10" matInput placeholder="Message" required formControlName="message"></textarea>
+            <mat-error *ngIf="!contactForm.get('message').valid && contactForm.get('message').touched">Champ <strong>requis</strong></mat-error>
+          </mat-form-field>
+        </div>
+        <div class="buttons__block">
+          <button type="submit" mat-raised-button [disabled]="!contactForm.valid">Envoyer</button>
+          <button type="button" mat-raised-button (click)="resetForm()">Réinitialiser</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div style="width: 100vw;">
+  <div style="width: 80%; margin:auto;border-top: 1px solid #ccc"></div>
+</div>
+
+<section id="instagram-feed" #feed>
+  <div class="instagram-feed__container">
+    <div class="instagram-feed__page-link">
+      <svg height="24" viewBox="0 0 511 511.9" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m510.949219 150.5c-1.199219-27.199219-5.597657-45.898438-11.898438-62.101562-6.5-17.199219-16.5-32.597657-29.601562-45.398438-12.800781-13-28.300781-23.101562-45.300781-29.5-16.296876-6.300781-34.898438-10.699219-62.097657-11.898438-27.402343-1.300781-36.101562-1.601562-105.601562-1.601562s-78.199219.300781-105.5 1.5c-27.199219 1.199219-45.898438 5.601562-62.097657 11.898438-17.203124 6.5-32.601562 16.5-45.402343 29.601562-13 12.800781-23.097657 28.300781-29.5 45.300781-6.300781 16.300781-10.699219 34.898438-11.898438 62.097657-1.300781 27.402343-1.601562 36.101562-1.601562 105.601562s.300781 78.199219 1.5 105.5c1.199219 27.199219 5.601562 45.898438 11.902343 62.101562 6.5 17.199219 16.597657 32.597657 29.597657 45.398438 12.800781 13 28.300781 23.101562 45.300781 29.5 16.300781 6.300781 34.898438 10.699219 62.101562 11.898438 27.296876 1.203124 36 1.5 105.5 1.5s78.199219-.296876 105.5-1.5c27.199219-1.199219 45.898438-5.597657 62.097657-11.898438 34.402343-13.300781 61.601562-40.5 74.902343-74.898438 6.296876-16.300781 10.699219-34.902343 11.898438-62.101562 1.199219-27.300781 1.5-36 1.5-105.5s-.101562-78.199219-1.300781-105.5zm-46.097657 209c-1.101562 25-5.300781 38.5-8.800781 47.5-8.601562 22.300781-26.300781 40-48.601562 48.601562-9 3.5-22.597657 7.699219-47.5 8.796876-27 1.203124-35.097657 1.5-103.398438 1.5s-76.5-.296876-103.402343-1.5c-25-1.097657-38.5-5.296876-47.5-8.796876-11.097657-4.101562-21.199219-10.601562-29.398438-19.101562-8.5-8.300781-15-18.300781-19.101562-29.398438-3.5-9-7.699219-22.601562-8.796876-47.5-1.203124-27-1.5-35.101562-1.5-103.402343s.296876-76.5 1.5-103.398438c1.097657-25 5.296876-38.5 8.796876-47.5 4.101562-11.101562 10.601562-21.199219 19.203124-29.402343 8.296876-8.5 18.296876-15 29.398438-19.097657 9-3.5 22.601562-7.699219 47.5-8.800781 27-1.199219 35.101562-1.5 103.398438-1.5 68.402343 0 76.5.300781 103.402343 1.5 25 1.101562 38.5 5.300781 47.5 8.800781 11.097657 4.097657 21.199219 10.597657 29.398438 19.097657 8.5 8.300781 15 18.300781 19.101562 29.402343 3.5 9 7.699219 22.597657 8.800781 47.5 1.199219 27 1.5 35.097657 1.5 103.398438s-.300781 76.300781-1.5 103.300781zm0 0" fill="#fafafa"/><path d="m256.449219 124.5c-72.597657 0-131.5 58.898438-131.5 131.5s58.902343 131.5 131.5 131.5c72.601562 0 131.5-58.898438 131.5-131.5s-58.898438-131.5-131.5-131.5zm0 216.800781c-47.097657 0-85.300781-38.199219-85.300781-85.300781s38.203124-85.300781 85.300781-85.300781c47.101562 0 85.300781 38.199219 85.300781 85.300781s-38.199219 85.300781-85.300781 85.300781zm0 0" fill="#fafafa"/><path d="m423.851562 119.300781c0 16.953125-13.746093 30.699219-30.703124 30.699219-16.953126 0-30.699219-13.746094-30.699219-30.699219 0-16.957031 13.746093-30.699219 30.699219-30.699219 16.957031 0 30.703124 13.742188 30.703124 30.699219zm0 0" fill="#fafafa"/></svg>
+      <a href="https://www.instagram.com/carreh_spa/" target="_blank">@CARREH_SPA</a> <!--[@linkFadeIn]="linkState"-->
+    </div>
+  </div>
+</section>

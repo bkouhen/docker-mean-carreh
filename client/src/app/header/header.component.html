@@ -1,0 +1,19 @@
+<mat-toolbar class="app-navbar">
+<mat-toolbar-row class="brand-toolbar"
+[class.mat-elevation-z5]="headerState === 'fixed'"
+[@fixedMobileHeader]="headerState"
+>
+
+  <div class="menu-toolbar__buttons__mobile">
+    <button mat-icon-button type="button" class="header__toggle-button" (click)="onToggleNav()">
+      <mat-icon aria-hidden="false" aria-label="Menu icon">menu</mat-icon>
+    </button>
+  </div>
+  <div class="logo_block">
+    <img src="../../assets/images/Logo/black@0.5x.png" alt="logo_image" class="logo-image">
+    <span *ngIf="headerState === 'normal'">Carre H Spa</span>
+  </div>
+
+</mat-toolbar-row>
+
+</mat-toolbar>

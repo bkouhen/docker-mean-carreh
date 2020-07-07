@@ -1,0 +1,24 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<div class="info-container">
+  <div class="info_block">
+    <div class="info_block_success" *ngIf="resultMode === 'success'">
+      <p *ngIf="!anonymousMode">Votre commande a bien été validée. Vous recevrez un email récapitulatif de votre commande et la retrouverez dans votre historique</p>
+      <p *ngIf="anonymousMode">Votre commande a bien été validée. Vous recevrez un email récapitulatif de votre commande</p>
+      <div class="button" *ngIf="!anonymousMode">
+        <button mat-raised-button routerLink="/orders">Mes commandes</button>
+      </div>
+      <div class="button" *ngIf="anonymousMode">
+        <button mat-raised-button routerLink="/">Accueil</button>
+      </div>
+    </div>
+    <div class="info_block_fail" *ngIf="resultMode === 'fail'">
+      <p>Une erreur s'est produite. Merci de bien vouloir réessayer</p>
+      <div class="button">
+        <button mat-raised-button routerLink="/cart">Mon panier</button>
+      </div>
+    </div>
+  </div>
+</div>

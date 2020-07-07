@@ -1,0 +1,79 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [ngClass]="{hidden: !(isHandset$ | async)}"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"> -->
+  <mat-sidenav #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="'dialog'"
+      [mode]="'over'"
+      [autoFocus]="false"
+      >
+    <mat-toolbar color="primary" [class.tb-decreased]="toolbarHeightDecreased">Catégories</mat-toolbar>
+
+    <mat-nav-list [class.nav-list-decreased]="toolbarHeightDecreased">
+      <div class="upper-nav-list">
+        <a mat-list-item routerLink='/' routerLinkActive='mat-primary' [routerLinkActiveOptions]="{exact: true}" (click)="drawer.close()">
+          Accueil
+        </a>
+        <a mat-list-item routerLink='/auth' routerLinkActive='mat-primary' *ngIf="!isAuthenticated" (click)="drawer.close()">
+          Connexion
+        </a>
+        <a mat-list-item *ngIf="isAuthenticated" (click)="onLogout()" (click)="drawer.close()">
+          Déconnexion
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item [matMenuTriggerFor]="categoriesMenu">
+          Produits
+        </a>
+        <mat-menu #categoriesMenu="matMenu">
+          <ng-container *ngFor="let category of categories; let i = index">
+            <button mat-menu-item [matMenuTriggerFor]="sub_menu">
+              <span>{{ category.title }}</span>
+            </button>
+            <mat-menu #sub_menu="matMenu">
+              <button *ngFor="let subCategory of categories[i].subCategories" mat-menu-item [routerLink]="['/products']" [queryParams]="{type: category.title, sub: subCategory}" (click)="drawer.close()">
+                <span>{{ subCategory }}</span>
+              </button>
+              <button mat-menu-item [routerLink]="['/products']" [queryParams]="{type: category.title}" (click)="drawer.close()">
+                <span>Voir tous les produits</span>
+              </button>
+            </mat-menu>
+          </ng-container>
+        </mat-menu>
+
+        <mat-divider></mat-divider>
+        <a mat-list-item (click)="drawer.close()">
+          Prestations
+        </a>
+        <a mat-list-item (click)="drawer.close()" routerLink='/appointments'>
+          Prendre rendez-vous
+        </a>
+        <a mat-list-item routerLink='/' fragment="contact" (click)="drawer.close()">
+          Contact
+        </a>
+      </div>
+      <div class="bottom-nav-list">
+        <a mat-list-item routerLink='/admin' routerLinkActive='mat-primary' *ngIf="isAdmin && isAuthenticated" (click)="drawer.close()">
+          <span style="padding-right:1rem" [matBadge]="notificationsCount" matBadgeColor="warn" matBadgePosition="after" matBadgeSize="medium" [matBadgeHidden]="notificationsCount <= 0" matBadgeOverlap="false">
+            Dashboard
+          </span>
+        </a>
+        <a mat-list-item *ngIf="isAuthenticated" class="email-button" routerLink='/profile' routerLinkActive='mat-primary' (click)="drawer.close()">
+          Mon compte
+        </a>
+        <a mat-list-item class="cart-button" routerLink='/cart' routerLinkActive='mat-primary' (click)="drawer.close()">
+          <mat-icon class="cart-icon">shopping_cart</mat-icon>
+          <span>Panier({{ cartTotalQty }})</span>
+        </a>
+      </div>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content #scrollableContent class="content" (scroll)="scrollEvent($event)">
+    <app-header (navOpen)="toggleNav(drawer)" (mobileHeaderToggle)="toggleToolbar($event)" id="main-header"></app-header>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

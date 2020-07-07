@@ -1,0 +1,77 @@
+<div class="card_block">
+  <div class="go-back">
+    <a mat-button [routerLink]="editMode ? '../..' : '..'">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Retour</span>
+    </a>
+  </div>
+  <mat-card class="mat-elevation-z5">
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <form (ngSubmit)="onSubmit()" [formGroup]="productForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <mat-label>Titre</mat-label>
+        <input
+        matInput
+        type="text"
+        placeholder="Titre"
+        required
+        formControlName="title"
+        >
+        <mat-error *ngIf="productForm.get('title').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Catégorie</mat-label>
+          <mat-select required formControlName="category">
+            <mat-option *ngFor="let category of categories" [value]="category.title">{{category.title}}</mat-option>
+          </mat-select>
+        <mat-error *ngIf="productForm.get('category').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sous-catégorie</mat-label>
+          <mat-select required formControlName="subCategory">
+            <mat-option *ngFor="let subCategory of subCategories" [value]="subCategory.title">{{subCategory.title}}</mat-option>
+          </mat-select>
+        <mat-error *ngIf="productForm.get('subCategory').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <div class="image-section">
+        <button mat-stroked-button type="button" (click)="filePicker.click()">Choisir une image</button>
+        <input type="file" #filePicker (change)="onImagePick($event)">
+        <p class="mat-small" *ngIf="productForm.get('image').hasError('invalidMimeType')">Format non <strong>valide</strong></p>
+      </div>
+      <div class="img-preview" *ngIf="imagePreview !== '' && imagePreview && productForm.get('image').valid">
+        <img [src]="imagePreview" [alt]="productForm.value.title">
+      </div>
+
+      <mat-form-field>
+        <mat-label>Prix</mat-label>
+        <input
+        matInput
+        type="number"
+        placeholder="Prix"
+        formControlName="price"
+        required
+        >
+        <mat-error *ngIf="productForm.get('price').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input
+        matInput
+        type="text"
+        placeholder="Description"
+        formControlName="description"
+        required
+        >
+        <mat-error *ngIf="productForm.get('description').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+      <div class="buttons">
+        <button [disabled]="!productForm.valid" mat-raised-button color="primary" type="submit">{{editMode ? 'Modifier' : 'Ajouter'}}</button>
+        <button mat-raised-button type="button" (click)="onResetForm()">Réinitialiser</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

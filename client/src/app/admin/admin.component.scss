@@ -1,0 +1,74 @@
+.header {
+  height: 3rem;
+  position: relative;
+  display: none;
+
+  & app-bottom-header {
+    display: none;
+  }
+}
+
+.welcome-section {
+  width: 100vw;
+  padding: 2rem;
+
+  & .welcome-title {
+    background-color: rgb(210, 151, 85);
+    color: white;
+    width: 80%;
+    max-width: 75rem;
+    border-radius: 5px 5px 0 0;
+    margin: auto;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  & .divider {
+    border: 0.5px solid #ccc;
+    width: 80%;
+  }
+
+  & .manage {
+    & a {
+      text-decoration: none;
+      user-select: none;
+      color: black;
+
+      &:hover {
+        & > div {
+          background-color: rgba(231, 229, 229, 0.7);
+        }
+      }
+    }
+    background-color: white;
+    width: 80%;
+    max-width: 75rem;
+    margin: auto;
+    border: 0.5px solid #ccc;
+
+    & hr {
+      margin: 0;
+      border-top: 1px;
+    }
+
+    & .manage-users, & .manage-products, & .manage-orders, & .manage-categories, & .manage-background, & .manage-appointments {
+      text-align: center;
+      padding: 2rem;
+    }
+  }
+}
+
+@media (min-width: 48rem) {
+  .header {
+    display: flex;
+
+    & app-bottom-header {
+      display: flex;
+      width: 100%;
+    }
+  }
+}

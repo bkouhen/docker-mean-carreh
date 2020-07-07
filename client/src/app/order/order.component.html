@@ -1,0 +1,44 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<div class="expansion-container" [@flyIn]>
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <mat-accordion *ngIf="orders.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let order of orders" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{order.date | date: 'dd/MM/yyyy HH:mm:ss'}}</mat-panel-title>
+        <mat-panel-description style="display: flex; justify-content: flex-end">
+          {{order.price}} DHS
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="section">
+        <strong><p class="section_title">Prénom :</p></strong>
+        <p>{{order.firstName}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Nom :</p></strong>
+        <p>{{order.lastName}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Adresse :</p></strong>
+        <p>{{order.address + ', ' + order.city}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">N° de téléphone :</p></strong>
+        <p>{{order.phoneNumber}}</p>
+      </div>
+      <div class="section" *ngIf="order.items">
+          <strong><p class="section_title">Produit : </p></strong>
+          <p style="margin:0" *ngFor="let item of order.items">{{ item.item.title }} => Quantité : {{item.Qty}}</p>
+      </div>
+      <div class="section" style="margin-top:12px">
+        <strong><p class="section_title">Montant total :</p></strong>
+        <p>{{order.price}} DHS</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="info-text">
+    <p *ngIf="orders.length <= 0 && !isLoading">Aucune commande trouvée</p>
+  </div>
+</div>

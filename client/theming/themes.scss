@@ -1,0 +1,8 @@
+@import '~@angular/material/theming';
+@import './custom-palette';
+
+$my-cp-primary: mat-palette($carreh-primary);
+$my-cp-accent:  mat-palette($carreh-accent);
+$my-cp-warn:    mat-palette($mat-red);
+
+$my-cp-light-theme: mat-light-theme($my-cp-primary, $my-cp-accent, $my-cp-warn);

@@ -1,0 +1,145 @@
+.header {
+  height: 3rem;
+  position: relative;
+  display: none;
+
+  & app-bottom-header {
+    display: none;
+  }
+}
+
+.go-back {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.mat-small {
+  color: red;
+  margin-top: 0.3rem;
+}
+
+.card_block {
+  width: 100%;
+  padding: 2rem;
+
+  & mat-card {
+    width: 100%;
+    padding: 1rem;
+    margin: auto;
+  }
+
+  & form {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .control_array {
+      width: 100%;
+
+      & .clear_icon {
+        cursor: pointer;
+        color: red;
+      }
+    }
+
+    & mat-form-field {
+      margin-bottom: 0.5rem;
+      width: 100%;
+    }
+
+    & .sub_buttons {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      & p {
+        margin: 0;
+      }
+    }
+
+    & .buttons {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      & button {
+        transition: background-color 0.2s ease-in-out;
+
+        &[type="submit"] {
+          margin-bottom: 1rem;
+        }
+
+        &[type="submit"]:not(:disabled) {
+
+          &:hover {
+            background-color: rgba(210, 151, 85, 0.7);
+          }
+        }
+
+        &[type="button"] {
+
+          &:hover {
+            background-color: rgba(245, 245, 245, 1);
+          }
+        }
+
+      }
+    }
+
+  }
+
+}
+
+@media (min-width: 48rem) {
+  .header {
+    display: flex;
+
+    & app-bottom-header {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .go-back {
+    justify-content: flex-start;
+  }
+
+  .card_block {
+    & mat-card {
+      width: 80%;
+      max-width: 55rem;
+    }
+
+    & form {
+      align-items: flex-start;
+
+      & .buttons, & .sub_buttons {
+        flex-direction: row;
+
+        & button {
+          &[type="submit"] {
+            margin-bottom: 0;
+          }
+
+          &[type="button"] {
+            margin-left : 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,62 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<div class="card_block" [@flyIn]>
+  <mat-card class="mat-elevation-z5">
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <form (ngSubmit)="onSubmit()" [formGroup]="authForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+        matInput
+        type="email"
+        placeholder="Email"
+        required
+        email
+        formControlName="email"
+        >
+        <mat-icon matSuffix *ngIf="authForm.get('email').valid">done</mat-icon>
+        <mat-error *ngIf="authForm.get('email').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        <mat-error *ngIf="authForm.get('email').hasError('email') && !authForm.get('email').hasError('required')">Veuillez entrer un email <strong>valide</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Mot de passe</mat-label>
+        <input
+        matInput
+        type="password"
+        placeholder="Mot de passe"
+        formControlName="password"
+        required
+        >
+        <mat-hint><strong>Requis : supérieur à 5 caractères</strong></mat-hint>
+        <mat-hint align="end" *ngIf="isLogin"><a routerLink='/password-reset'><strong>Mot de passe oublié ?</strong></a></mat-hint>
+        <mat-icon matSuffix *ngIf="authForm.get('password').valid">done</mat-icon>
+        <mat-error *ngIf="authForm.get('password').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="!isLogin">
+        <mat-label>Confirmez votre mot de passe</mat-label>
+        <input
+        matInput
+        type="password"
+        placeholder="Confirmation du mot de passe"
+        formControlName="confirmPassword"
+        required
+        >
+        <mat-icon matSuffix *ngIf="authForm.get('confirmPassword').valid && authForm.get('password').valid && passwordMatch()">done</mat-icon>
+        <mat-error *ngIf="authForm.get('confirmPassword').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        <mat-error *ngIf="!passwordMatch() && !authForm.get('confirmPassword').hasError('required')">Veuillez renseigner le <strong>même</strong> mot de passe</mat-error>
+      </mat-form-field>
+      <div class="buttons">
+        <button [disabled]="!authForm.valid" mat-raised-button color="primary" type="submit">{{ isLogin ? 'Connexion' : 'Inscription' }}</button>
+        <button mat-raised-button type="button" (click)="switchAuthMode(isLogin)">
+          <mat-icon>cached</mat-icon>
+          {{ !isLogin ? 'Connexion' : 'Inscription' }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

@@ -1,0 +1,44 @@
+@import '~@angular/material/theming';
+
+
+/*
+@include expansion-typography($my-config);
+*/
+
+@mixin expansion-typography($config) {
+  .mat-expansion-panel-header {
+    font: {
+      family: mat-font-family($config);
+      size: mat-font-size($config, title);
+      weight: mat-font-weight($config, title);
+    }
+  }
+}
+
+@mixin example-typography($config) {
+  .typo-example .mat-display-4 {
+    @include mat-typography-level-to-styles($config, display-4);
+  }
+}
+
+// Define a custom typography based on levels (Font-size, Line-height and Font-weight)
+$custom-typography: mat-typography-config(
+  $font-family: 'Montserrat, monospace',
+  $display-4: mat-typography-level(8px, 24px, 700),
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(24px, 24px, 700)
+);
+
+// Define a custom component typography Theme :
+//@include example-typography($custom-typography);
+
+// Overwrite the entire typography CSS Classes :
+//@include mat-base-typography($custom-typography);
+
+// Overwrite only for a component (depends on component theming function) :
+//@include mat-radio-typography($custom-typography);
+
+// Overwrite for the entire Angular Material (Base Typo + All Components) :
+//@include angular-material-typography($custom-typography);
+// OR
+// Pass the config to mat-core($custom-typography);

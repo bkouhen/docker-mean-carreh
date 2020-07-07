@@ -1,0 +1,29 @@
+<div class="expansion-container" *ngIf="!componentLoaded">
+  <p *ngIf="categories.length <= 0 && !isLoading" class="info-text">Aucune catégorie trouvée</p>
+  <div class="add-category" *ngIf="!isLoading">
+    <button type="button" routerLink='create' mat-raised-button color="primary" class="add-category__button">
+      Ajouter une catégorie
+    </button>
+  </div>
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <mat-accordion *ngIf="categories.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let category of categories">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ category.title }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="section">
+        <strong><p class="section_title">Sous-catégories :</p></strong>
+
+          <p *ngFor="let subCategory of category.subCategories">{{ subCategory }}</p>
+
+      </div>
+      <mat-action-row>
+        <button mat-button color="primary" [routerLink]="['edit', category._id]">Modifier</button>
+        <button mat-button color="warn" (click)="onDelete(category._id)">Supprimer</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+
+<router-outlet (activate)="onComponentLoaded($event)" (deactivate)="onComponentUnloaded($event)"></router-outlet>

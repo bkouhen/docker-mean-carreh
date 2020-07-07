@@ -1,0 +1,218 @@
+.header {
+  height: 3rem;
+  position: relative;
+  display: none;
+
+  & app-bottom-header {
+    display: none;
+  }
+}
+
+mat-progress-bar {
+  width: 80%;
+  margin: 2rem 0;
+}
+
+.cards-container {
+    width: 100vw;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+
+  & .cards_block {
+    width: 100%;
+  }
+
+  & .command_button {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  & .command_total_price {
+    width: 100%;
+    margin: 1rem auto;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.863);
+    border: 2px solid #d29755;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+
+  }
+
+  & .info_block {
+    width: 90%;
+    background-color: rgb(210, 151, 85);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & p {
+      margin: 0;
+    }
+
+    & .clear_button {
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: scale(0.8)
+    }
+  }
+
+  & .form_block {
+    width: 90%;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+
+    & form {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & mat-form-field {
+      margin-bottom: 0.5rem;
+      width: 100%;
+    }
+    }
+
+  }
+
+  & .card_block {
+    width: 100%;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    & mat-form-field {
+      width: 50%;
+    }
+
+    & .img_block {
+      width: 100%;
+      height: auto;
+
+      & img  {
+        width: 100%;
+      }
+    }
+
+    & .description_block {
+      margin: 1rem 2rem;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+
+      & h2 {
+        margin: 0;
+      }
+
+      & p {
+        margin: 10px 0;
+      }
+
+    }
+
+    & .price_block {
+      padding: 1rem;
+      width:80%;
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 30rem) {
+  .cards-container {
+    & .card_block {
+      width: 70%;
+      & .img_block {
+        width: 100%;
+      }
+    }
+
+    & .command_total_price {
+      width: 70%;
+    }
+
+  }
+}
+
+@media (min-width: 48rem) {
+  .header {
+    display: flex;
+
+    & app-bottom-header {
+      display: flex;
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 48rem) {
+  .cards-container {
+    & .info_block {
+      width: 80%;
+      max-width: 55rem;
+    }
+
+    & .command_total_price {
+      width: 20rem;
+    }
+
+    & .form_block {
+      width: 80%;
+      max-width: 55rem;
+      & form {
+        align-items: flex-start;
+      }
+    }
+
+    & .card_block {
+      width: 80%;
+      flex-direction: row;
+      align-items: unset;
+
+      & .clear_button {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+      }
+
+      & .img_block {
+        width: 35%;
+        margin: 0;
+
+        & img {
+          height: 100%;
+        }
+      }
+
+      & .description_block {
+        margin: 1rem 2rem;
+        width: 45%;
+        text-align: left;
+      }
+
+      & .price_block {
+        width: 30%;
+        text-align: right;
+      }
+    }
+  }
+}

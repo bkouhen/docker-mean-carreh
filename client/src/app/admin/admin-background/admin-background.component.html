@@ -1,0 +1,63 @@
+<div class="card_block">
+<mat-card class="mat-elevation-z5">
+  <h3>Images actuelles :</h3>
+  <p *ngIf="background.length === 0 && !isLoading">Aucune image présente actuellement</p>
+  <div *ngIf="background.length > 0 && !isLoading" class="actual-img-section">
+    <div class="img-preview" *ngFor="let img of background">
+      <img [src]="img.url" [alt]="img._id" *ngIf="img.url !== 'null'">
+      <div *ngIf="img.url === 'null'" class="placeholder-image">Pas d'image en Position {{img.position + 1}}</div>
+      <mat-icon class="clear-button" (click)="onDelete(img.position)">clear</mat-icon>
+    </div>
+  </div>
+</mat-card>
+</div>
+
+<div class="card_block">
+  <mat-card class="mat-elevation-z5">
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+      <div class="img-form" *ngIf="!isLoading">
+        <div class="image-section">
+          <button mat-stroked-button type="button" (click)="filePicker1.click()">Image 1</button>
+          <input type="file" #filePicker1 (change)="onImagePick($event, 0)">
+          <p class="mat-small" *ngIf="imgForm[0].hasError('invalidMimeType')">Format non <strong>valide</strong></p>
+        </div>
+
+        <div *ngIf="imgP[0] && imgP[0] !== '' && imgForm[0].valid">
+          <div class="img-preview">
+            <img [src]="imgP[0]" [alt]="imgForm[0].value.title">
+          </div>
+        </div>
+
+        <div class="image-section">
+          <button mat-stroked-button type="button" (click)="filePicker2.click()">Image 2</button>
+          <input type="file" #filePicker2 (change)="onImagePick($event, 1)">
+          <p class="mat-small" *ngIf="imgForm[1].hasError('invalidMimeType')">Format non <strong>valide</strong></p>
+        </div>
+
+        <div *ngIf="imgP[1] && imgP[1] !== '' && imgForm[1].valid">
+          <div class="img-preview">
+            <img [src]="imgP[1]" [alt]="imgForm[1].value.title">
+          </div>
+        </div>
+
+        <div class="image-section">
+          <button mat-stroked-button type="button" (click)="filePicker3.click()">Image 3</button>
+          <input type="file" #filePicker3 (change)="onImagePick($event, 2)">
+          <p class="mat-small" *ngIf="imgForm[2].hasError('invalidMimeType')">Format non <strong>valide</strong></p>
+        </div>
+
+        <div *ngIf="imgP[2] && imgP[2] !== '' && imgForm[2].valid">
+          <div class="img-preview">
+            <img [src]="imgP[2]" [alt]="imgForm[2].value.title">
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Enregistrer</button>
+          <button mat-raised-button type="button" (click)="onResetForm()">Réinitialiser</button>
+        </div>
+      </div>
+
+  </mat-card>
+</div>
+

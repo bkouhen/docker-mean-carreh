@@ -1,0 +1,6 @@
+@import '~@angular/material/theming';
+@import './theming/themes';
+
+@include mat-core();
+
+@include angular-material-theme($my-cp-light-theme);

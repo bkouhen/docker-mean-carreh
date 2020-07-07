@@ -1,0 +1,150 @@
+@import '~@angular/material/theming';
+
+@mixin mat-button-override-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-button, .mat-icon-button, .mat-stroked-button {
+    // Buttons without a background color should inherit the font color. This is necessary to
+    // ensure that the button is readable on custom background colors. It's wrong to always assume
+    // that those buttons are always placed inside of containers with the default background
+    // color of the theme (e.g. themed toolbars).
+    color: inherit;
+    background: transparent;
+
+    //@include _mat-button-theme-property($theme, 'color', text);
+    @include _mat-button-theme-property($theme, 'color', 900);
+    @include _mat-button-focus-overlay-color($theme);
+
+    // Setup the ripple color to be based on the text color. This ensures that the ripples
+    // are matching with the current theme palette and are in contrast to the background color
+    // (e.g in themed toolbars).
+    .mat-ripple-element {
+      opacity: $_mat-button-ripple-opacity;
+      //background-color: currentColor;
+      background-color: red;
+    }
+  }
+
+  .mat-button-focus-overlay {
+    background: map_get($foreground, base);
+  }
+
+  // Note: this needs a bit extra specificity, because we're not guaranteed the inclusion
+  // order of the theme styles and the button reset may end up resetting this as well.
+  .mat-stroked-button:not([disabled]) {
+    border-color: mat-color($foreground, divider);
+  }
+
+  .mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
+    // Default font and background color when not using any color palette.
+    color: mat-color($foreground, text);
+    background-color: mat-color($background, raised-button);
+
+    @include _mat-button-theme-property($theme, 'color', default-contrast);
+    //@include _mat-button-theme-property($theme, 'background-color', default);
+    @include _mat-button-theme-property($theme, 'background-color', A700);
+    //@include _mat-button-ripple-color($theme, default-contrast);
+    @include _mat-button-ripple-color($theme, 900, 0.8);
+  }
+
+  .mat-stroked-button, .mat-flat-button {
+    @include _mat-theme-overridable-elevation(0, $theme);
+  }
+
+  .mat-raised-button {
+    @include _mat-theme-overridable-elevation(2, $theme);
+
+    &:not([disabled]):active {
+      @include _mat-theme-overridable-elevation(8, $theme);
+    }
+
+    &[disabled] {
+      @include _mat-theme-overridable-elevation(0, $theme);
+    }
+  }
+
+  .mat-fab, .mat-mini-fab {
+    @include _mat-theme-overridable-elevation(6, $theme);
+
+    &:not([disabled]):active {
+      @include _mat-theme-overridable-elevation(12, $theme);
+    }
+
+    &[disabled] {
+      @include _mat-theme-overridable-elevation(0, $theme);
+    }
+  }
+}
+
+@mixin mat-button-override-class() {
+  .mat-button.mat-button-override,
+  .mat-icon-button.mat-button-override,
+  .mat-stroked-button.mat-button-override {
+    color: red;
+    background: transparent;
+
+    .mat-ripple-element {
+      opacity: $_mat-button-ripple-opacity;
+      //background-color: currentColor;
+      background-color: rgb(19, 117, 19);
+    }
+
+    .mat-button-focus-overlay {
+      background: rgb(252, 252, 24);
+    }
+
+    &:hover {
+      .mat-button-focus-overlay {
+        opacity : 0.3;
+      }
+    }
+  }
+
+  .mat-flat-button.mat-button-override,
+  .mat-raised-button.mat-button-override,
+  .mat-fab.mat-button-override.prior,
+  .mat-mini-fab.mat-button-override.prior {
+    // Default font and background color when not using any color palette.
+    color: rgb(105, 26, 11);
+    background-color: rgb(31, 136, 31);
+
+    .mat-ripple-element {
+      opacity: 0.3;
+      //background-color: currentColor;
+      background-color: rgb(238, 56, 56);
+    }
+
+    &:hover {
+      @include mat-elevation(20, #e91e63, 0.8);
+    }
+
+  }
+}
+
+@mixin no-hover-effect() {
+  .mat-button.no-hover-effect {
+    color:inherit;
+    background: transparent;
+
+    .mat-ripple-element {
+      opacity: 0.1;
+      background-color: currentColor;
+    }
+
+    .mat-button-focus-overlay {
+      background: transparent;
+    }
+
+    &:hover {
+      color:rgb(167, 165, 165);
+      .mat-button-focus-overlay {
+        opacity : 0;
+      }
+    }
+  }
+}
+

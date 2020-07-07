@@ -1,0 +1,103 @@
+.mat-toolbar.app-navbar {
+  display: none;
+}
+
+.mat-toolbar.app-navbar .mat-toolbar-row.menu-toolbar  {
+  position: absolute;
+  z-index:50;
+  justify-content: space-between;
+  background-color: rgba(245, 230, 215, 0.5);
+  color: black;
+  display: none;
+  height: 3rem;
+}
+
+.active-link {
+  color: #d29755;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  display : flex;
+  align-items: center;
+  list-style: none;
+  padding : 0;
+  margin : 0;
+}
+
+
+.header__brand {
+  vertical-align: middle;
+
+  & .home-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.header__toggle-button {
+  vertical-align: middle;
+
+  & .menu-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.email-button {
+
+}
+
+.header__action-buttons {
+  display: none;
+
+  & li {
+    margin-right: 1rem;
+  }
+
+  & .order-button {
+  }
+
+  & .cart-button {
+    vertical-align: middle;
+
+    & .cart-icon {
+      margin-right: 0.5rem;
+    }
+
+  }
+}
+
+@media (min-width: 48rem) {
+  .mat-toolbar.app-navbar {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+  }
+
+  .mat-toolbar.app-navbar .mat-toolbar-row.menu-toolbar {
+    display: flex;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+  }
+
+  .header__menu-button {
+    display: flex
+  }
+}
+
+@media (min-width: 70rem) {
+  .header__action-buttons {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .header__menu-button {
+    display: none
+  }
+}

@@ -1,0 +1,104 @@
+<mat-toolbar class="app-navbar">
+  <mat-toolbar-row class="menu-toolbar"
+  [@fixedHeader]="headerState"
+  [class.mat-elevation-z5]="headerState === 'fixed'"
+  >
+    <div class="menu-toolbar__buttons">
+      <button routerLink='/' routerLinkActive="mat-primary" [routerLinkActiveOptions]="{exact: true}" mat-icon-button type="button" class="header__brand">
+        <mat-icon aria-hidden="false" aria-label="Home icon">home</mat-icon>
+      </button>
+      <button mat-button type="button" class="header__toggle-button" [matMenuTriggerFor]="categoriesMenu" [ngClass]="{'active-link': productsUrl}">
+        <!--<mat-icon class="menu-icon" aria-hidden="false" aria-label="Menu icon">menu</mat-icon>-->
+        Produits
+      </button>
+      <mat-menu #categoriesMenu="matMenu">
+        <ng-container *ngFor="let category of categories; let i = index">
+          <button mat-menu-item [matMenuTriggerFor]="sub_menu">
+            <span>{{ category.title }}</span>
+          </button>
+          <mat-menu #sub_menu="matMenu">
+            <button *ngFor="let subCategory of categories[i].subCategories" mat-menu-item [routerLink]="['/products']" [queryParams]="{type: category.title, sub: subCategory}">
+              <span>{{ subCategory }}</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/products']" [queryParams]="{type: category.title}">
+              <span>Voir tous les produits</span>
+            </button>
+          </mat-menu>
+        </ng-container>
+      </mat-menu>
+      <button mat-button type="button" class="header__toggle-button" [matMenuTriggerFor]="servicesMenu">
+        <!--<mat-icon class="menu-icon" aria-hidden="false" aria-label="Menu icon">menu</mat-icon>-->
+        Services
+      </button>
+      <mat-menu #servicesMenu="matMenu">
+        <button mat-menu-item>
+          <span>Prestations</span>
+        </button>
+        <button mat-menu-item routerLink='/appointments' routerLinkActive='mat-primay'>
+          <span>Prendre rendez-vous</span>
+        </button>
+        <button mat-menu-item routerLink='/' fragment="contact">
+          <span>Contact</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="header__menu-button">
+      <button mat-button type="button" [matMenuTriggerFor]="menu">
+        Menu
+        <!--<mat-icon class="menu-icon" aria-hidden="false" aria-label="Menu icon">menu</mat-icon>-->
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="cart-button" routerLink='/cart' routerLinkActive='mat-primary'>
+          <mat-icon class="cart-icon">shopping_cart</mat-icon>
+          <span>Panier({{cartTotalQty}})</span>
+        </button>
+        <button *ngIf="isAdmin && isAuthenticated" mat-menu-item routerLink='/admin' routerLinkActive='mat-primary'>
+          <span style="padding-right:1rem" [matBadge]="notificationsCount" matBadgeColor="warn" matBadgePosition="after" matBadgeSize="medium" [matBadgeHidden]="notificationsCount <= 0" matBadgeOverlap="false">Dashboard</span>
+        </button>
+        <button *ngIf="isAuthenticated" mat-menu-item routerLink='/orders'>
+          <span>Mes commandes</span>
+        </button>
+        <button *ngIf="isAuthenticated" mat-menu-item routerLink='/profile'>
+          <span>Mon compte</span>
+        </button>
+        <button *ngIf="!isAuthenticated" mat-menu-item routerLink='/auth' routerLinkActive='mat-primary'>
+          <span>Connexion</span>
+        </button>
+        <button *ngIf="isAuthenticated" mat-menu-item (click)="onLogout()">
+          <span>Déconnexion</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <ul class="header__action-buttons">
+      <li *ngIf="isAdmin && isAuthenticated">
+        <a mat-stroked-button routerLink='/admin' routerLinkActive='mat-primary' [matBadge]="notificationsCount" matBadgeColor="warn" matBadgePosition="after" matBadgeSize="medium" [matBadgeHidden]="notificationsCount <= 0">Dashboard</a>
+      </li>
+      <li>
+        <button mat-stroked-button class="cart-button" routerLink='/cart' routerLinkActive='mat-primary'>
+          <mat-icon class="cart-icon">shopping_cart</mat-icon>
+          <!--<span [ngClass]="{'pulsing': pulsing}" (animationend)="pulsing = false">Panier({{cartTotalQty || 0}})</span>-->
+          <div style="display: inline-block; width: 4.5rem" *ngIf="cartTotalQty > 0 && actualUrl === '/products'">
+            <div style="display: inline-block" *ifChanges="cartTotalQty" [@triggerChange]>
+              <span>Panier({{ cartTotalQty }})</span>
+            </div>
+          </div>
+          <span *ngIf="actualUrl !== '/products' || cartTotalQty === 0">Panier({{cartTotalQty}})</span>
+        </button>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a mat-stroked-button class="order-button" routerLink='/orders' routerLinkActive='mat-primary'>Mes commandes</a>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a mat-stroked-button class="email-button" routerLink='/profile' routerLinkActive='mat-primary'>Mon compte</a>
+      </li>
+      <li *ngIf="!isAuthenticated">
+        <a mat-stroked-button routerLink='/auth' routerLinkActive='mat-primary'>Connexion</a>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <button mat-stroked-button (click)="onLogout()">Déconnexion</button>
+      </li>
+    </ul>
+  </mat-toolbar-row>
+</mat-toolbar>

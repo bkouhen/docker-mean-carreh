@@ -1,0 +1,77 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link [routerLink]="['/admin']" (click)="activeLink = 'home'" [active]="activeLink === 'home'">Accueil</a>
+  <a mat-tab-link [routerLink]="['products']" (click)="activeLink = 'products'" [active]="activeLink === 'products'">Produits</a>
+  <a mat-tab-link [routerLink]="['categories']" (click)="activeLink = 'categories'" [active]="activeLink === 'categories'">Catégories</a>
+  <a mat-tab-link [routerLink]="['users']" (click)="activeLink = 'users'" [active]="activeLink === 'users'">
+    <span style="padding-right:1rem" [matBadge]="userCount" matBadgeColor="warn" matBadgePosition="after" matBadgeSize="medium" [matBadgeHidden]="userCount <= 0" matBadgeOverlap="false">Utilisateurs</span>
+  </a>
+  <a mat-tab-link [routerLink]="['orders']" (click)="activeLink = 'orders'" [active]="activeLink === 'orders'">
+    <span style="padding-right:1rem" [matBadge]="orderCount" matBadgeColor="warn" matBadgePosition="after" matBadgeSize="medium" [matBadgeHidden]="orderCount <= 0" matBadgeOverlap="false">Commandes</span>
+  </a>
+  <a mat-tab-link [routerLink]="['appointments']" (click)="activeLink = 'appointments'" [active]="activeLink === 'appointments'">
+    <span style="padding-right:1rem" [matBadge]="appointmentCount" matBadgeColor="warn" matBadgePosition="after" matBadgeSize="medium" [matBadgeHidden]="appointmentCount <= 0" matBadgeOverlap="false">Planning</span>
+  </a>
+  <a mat-tab-link [routerLink]="['background']" (click)="activeLink = 'background'" [active]="activeLink === 'background'">Background</a>
+</nav>
+
+<div class="welcome-section" *ngIf="activeLink === 'home'">
+  <div class="welcome-title">
+    <h1><strong>Bienvenue dans votre espace Admin</strong></h1>
+    <p>Que voulez-vous faire ?</p>
+  </div>
+  <div class="manage">
+    <a [routerLink]="['products']" (click)="activeLink = 'products'">
+      <div class="manage-products">
+        <mat-icon>storefront</mat-icon>
+        <h3><strong>Gérer les produits</strong></h3>
+        <p>Ajout, Modification et Suppression des produits proposés</p>
+      </div>
+    </a>
+    <hr>
+    <a [routerLink]="['categories']" (click)="activeLink = 'categories'">
+      <div class="manage-categories">
+        <mat-icon>category</mat-icon>
+        <h3><strong>Gérer les catégories de produits</strong></h3>
+        <p>Différentes catégories de produits disponibles dans l'application</p>
+      </div>
+    </a>
+    <hr>
+    <a [routerLink]="['users']" (click)="activeLink = 'users'">
+      <div class="manage-users">
+        <mat-icon>account_box</mat-icon>
+        <h3><strong>Gérer les utilisateurs</strong></h3>
+        <p>Aperçu des principales informations des utilisateurs inscrits</p>
+      </div>
+    </a>
+    <hr>
+    <a [routerLink]="['orders']" (click)="activeLink = 'orders'">
+      <div class="manage-orders">
+        <mat-icon>list_alt</mat-icon>
+        <h3><strong>Gérer les commandes</strong></h3>
+        <p>Historique des commandes passées par les utilisateurs</p>
+      </div>
+    </a>
+    <hr>
+    <a [routerLink]="['appointments']" (click)="activeLink = 'appointments'">
+      <div class="manage-appointments">
+        <mat-icon>event</mat-icon>
+        <h3><strong>Gérer le planning et les prises de rendez-vous</strong></h3>
+        <p>Gestion et vue globale sur le planning et les RDV utilisateurs</p>
+      </div>
+    </a>
+    <hr>
+    <a [routerLink]="['background']" (click)="activeLink = 'background'">
+      <div class="manage-background">
+        <mat-icon>wallpaper</mat-icon>
+        <h3><strong>Gérer le background de la page d'accueil</strong></h3>
+        <p>Gestion des 3 images du carousel de la page d'accueil</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

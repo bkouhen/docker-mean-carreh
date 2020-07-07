@@ -1,0 +1,107 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<div class="cards-container" [@flyIn]>
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <div class="cards_block" *ngIf="!isLoading">
+    <div class="info_block" *ngIf="displayInfo">
+      <p>Merci de bien vouloir renseigner ces informations. Elles seront requises lors du passage de vos commandes et de la prise de rendez-vous</p>
+      <button mat-icon-button class="clear_button" (click)="displayInfo = false">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+    <div class="info_block_success" *ngIf="updateSuccess">
+      <p >Vos changements ont bien été pris en compte</p>
+      <button mat-icon-button class="clear_button" (click)="updateSuccess = false">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+    <div class="form_block mat-elevation-z5">
+      <form (ngSubmit)="updateUserInfo()" [formGroup]="userForm">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+          matInput
+          type="email"
+          placeholder="Email"
+          required
+          email
+          formControlName="email"
+          >
+          <mat-error *ngIf="userForm.get('email').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+          <mat-error *ngIf="userForm.get('email').hasError('email') && !userForm.get('email').hasError('required')">Veuillez entrer un email <strong>valide</strong></mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Prénom</mat-label>
+          <input
+          matInput
+          type="text"
+          placeholder="Prénom"
+          required
+          formControlName="firstName"
+          >
+          <mat-icon matSuffix *ngIf="userForm.get('firstName').valid">done</mat-icon>
+          <mat-error *ngIf="userForm.get('firstName').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input
+          matInput
+          type="text"
+          placeholder="Nom"
+          formControlName="lastName"
+          required
+          >
+          <mat-icon matSuffix *ngIf="userForm.get('lastName').valid">done</mat-icon>
+          <mat-error *ngIf="userForm.get('lastName').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Adresse</mat-label>
+          <input
+          matInput
+          type="text"
+          placeholder="Adresse"
+          formControlName="address"
+          required
+          >
+          <mat-icon matSuffix *ngIf="userForm.get('address').valid">done</mat-icon>
+          <mat-error *ngIf="userForm.get('address').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Ville</mat-label>
+          <input
+          matInput
+          type="text"
+          placeholder="Ville"
+          formControlName="city"
+          required
+          >
+          <mat-icon matSuffix *ngIf="userForm.get('city').valid">done</mat-icon>
+          <mat-error *ngIf="userForm.get('city').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Téléphone</mat-label>
+          <input
+          matInput
+          type="text"
+          maxlength=14
+          placeholder="06 61 56 22 04"
+          formControlName="phoneNumber"
+          required
+          >
+          <mat-icon matSuffix *ngIf="userForm.get('phoneNumber').valid">done</mat-icon>
+          <mat-error *ngIf="userForm.get('phoneNumber').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+          <mat-error *ngIf="userForm.get('phoneNumber').hasError('invalidPhoneNumber') && !userForm.get('phoneNumber').hasError('required')">Veuillez saisir un numéro <strong>valide</strong></mat-error>
+        </mat-form-field>
+        <div class="buttons">
+          <button [disabled]="!userForm.valid || !editMode" mat-raised-button color="primary" type="submit">Envoyer</button>
+          <button (click)="editMode ? switchToView() : switchToEdit()" mat-raised-button color="accent" type="button">{{editMode ? 'Annuler' : 'Modifier'}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

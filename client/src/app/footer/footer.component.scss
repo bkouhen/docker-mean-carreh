@@ -1,0 +1,129 @@
+.footer-block {
+  width: 100vw;
+  padding: 2rem 2rem 0;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .brand_row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0;
+
+    & a {
+      text-decoration: none;
+      user-select: none;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    & .brand_col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 1rem 0;
+
+      & .logo {
+        & img {
+          height: 2rem;
+        }
+      }
+
+      & .social {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        & .insta-icon {
+          fill: #a5a9ad;
+          transition: fill 0.2s ease-in-out;
+          cursor: pointer;
+          user-select: none;
+          margin: 0.5rem;
+
+          &:hover {
+            fill: white;
+          }
+        }
+
+        & .fb-icon {
+          fill: #a5a9ad;
+          transition: fill 0.2s ease-in-out;
+          cursor: pointer;
+          user-select: none;
+          margin: 0.5rem;
+
+          &:hover {
+            fill: white;
+          }
+        }
+      }
+    }
+
+    & .contact_col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 1rem 0;
+
+      & a {
+        margin: 0.5rem 0;
+      }
+    }
+
+    & .terms-of-use_col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 1rem 0;
+
+      & a {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+
+  & .copyright_row {
+    text-align: center;
+    margin: 1rem 0;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+}
+
+@media (min-width: 48rem) {
+  .footer-block {
+    & .brand_row {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      margin: 1rem 0;
+
+      & .contact_col {
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 1rem 0;
+      }
+
+    }
+  }
+}
+
+@media (min-width: 64rem) {
+  .footer-block {
+
+  }
+}

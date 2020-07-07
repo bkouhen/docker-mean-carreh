@@ -1,0 +1,146 @@
+.header {
+  height: 3rem;
+  position: relative;
+  display: none;
+
+  & app-bottom-header {
+    display: none;
+  }
+}
+
+.cards-container {
+    width: 100vw;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+
+  & .cards_block {
+    width: 100%;
+  }
+
+  & .info_block_success {
+    width: 90%;
+    background-color: rgb(123, 163, 96);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem auto;
+    text-align: center;
+    position: relative;
+
+    & p {
+      margin: 0;
+    }
+
+    & .clear_button {
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: scale(0.8)
+    }
+  }
+
+  & .info_block {
+    width: 90%;
+    background-color: rgb(210, 151, 85);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & p {
+      margin: 0;
+    }
+
+    & .clear_button {
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: scale(0.8)
+    }
+  }
+
+  & .form_block {
+    width: 90%;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+
+    & form {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    & .buttons button {
+      margin: 0.5rem;
+    }
+
+    & mat-form-field {
+      margin-bottom: 0.5rem;
+      width: 100%;
+    }
+    }
+
+  }
+}
+
+@media (min-width: 25rem) {
+
+}
+
+@media (min-width: 48rem) {
+  .header {
+    display: flex;
+
+    & app-bottom-header {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .cards-container {
+    & .info_block {
+      width: 80%;
+      max-width: 55rem;
+    }
+
+    & .info_block_success {
+      width: 80%;
+      max-width: 55rem;
+      text-align: unset;
+    }
+
+    & .form_block {
+      width: 80%;
+      max-width: 55rem;
+      & form {
+        align-items: flex-start;
+
+        & .buttons {
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 64rem) {
+
+}

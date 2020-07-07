@@ -1,0 +1,52 @@
+<div class="expansion-container">
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <mat-accordion *ngIf="orders.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let order of orders" [hideToggle]="order.readStatus === 0" (click)="updateOrderReadStatus(order, order._id)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{order.email}}</mat-panel-title>
+        <mat-panel-description style="display: flex; justify-content: space-between;">
+          {{order.date | date: 'dd/MM/yyyy HH:mm:ss'}}
+          <mat-icon color="warn" *ngIf="order.readStatus === 0" style="user-select: none;">notifications</mat-icon>
+          <mat-icon *ngIf="order.read && order.read === 1" style="user-select: none;">done</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="section">
+        <strong><p class="section_title">Identifiant de commande :</p></strong>
+        <p>{{order._id}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Date de commande :</p></strong>
+        <p>{{order.date | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Prénom :</p></strong>
+        <p>{{order.firstName}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Nom :</p></strong>
+        <p>{{order.lastName}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Adresse :</p></strong>
+        <p>{{order.address + ', ' + order.city}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">N° de téléphone :</p></strong>
+        <p>{{order.phoneNumber}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Utilisateur inscrit :</p></strong>
+        <p>{{order.userId ? 'Oui' : 'Non'}}</p>
+      </div>
+      <div class="section" *ngIf="order.items">
+          <strong><p class="section_title">Produit : </p></strong>
+          <p style="margin:0" *ngFor="let item of order.items">{{ item.item.title }} => Quantité : {{item.Qty}}</p>
+      </div>
+      <div class="section" style="margin-top:12px">
+        <strong><p class="section_title">Montant total :</p></strong>
+        <p>{{order.price}} DHS</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <p *ngIf="orders.length <= 0 && !isLoading" class="info-text">Aucune commande trouvée</p>
+</div>

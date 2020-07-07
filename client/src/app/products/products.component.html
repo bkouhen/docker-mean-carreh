@@ -1,0 +1,48 @@
+<div class="header">
+  <app-bottom-header></app-bottom-header>
+</div>
+
+<div class="filter_block" *ngIf="!isLoading && filteredProducts && type">
+  <mat-form-field>
+    <mat-label>Choisissez une catégorie</mat-label>
+    <mat-select [formControl]="subCatControl">
+      <mat-option *ngFor="let sub of subCategories" [value]="sub">{{sub}}</mat-option>
+      <mat-option value="all-products">Voir tous les produits</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="cards-container">
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <div class="cards_block" *ngIf="!isLoading && filteredProducts && filteredProducts.length > 0" [@flyIn]>
+    <mat-card *ngFor="let product of filteredProducts" [class.mat-elevation-z2]="!product.hovered" [class.mat-elevation-z8]="product.hovered" (mouseenter)="product.hovered = true" (mouseleave)="product.hovered = false">
+      <mat-card-header>
+        <mat-card-title>{{product.title}}</mat-card-title>
+        <mat-card-subtitle>{{product.category}} / {{product.subCategory}}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="image_block">
+        <img mat-card-image [src]="product.image" [alt]="product.title">
+      </div>
+      <mat-card-content>
+        <p>
+          {{product.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <p>Ajouter au panier</p>
+        <button mat-icon-button (click)="onAddToCart(product)">
+          <mat-icon>add_box</mat-icon>
+        </button>
+        <span *ngIf="product.Qty > 0">{{product.Qty}}</span>
+        <button mat-icon-button *ngIf="product.Qty > 0" (click)="onRemoveFromCart(product)">
+          <mat-icon>indeterminate_check_box</mat-icon>
+        </button>
+      </mat-card-actions>
+      <div class="spacer" style="margin: 1.5rem 0"></div>
+      <div class="price_block">
+        {{product.price}} DHS
+      </div>
+    </mat-card>
+  </div>
+  <p *ngIf="filteredProducts && filteredProducts.length <= 0 && !isLoading" class="info-text">Aucun produit disponible</p>
+</div>

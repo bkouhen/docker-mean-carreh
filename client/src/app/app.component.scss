@@ -1,0 +1,22 @@
+main {
+  padding: 0;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100 - 6rem - 9rem);
+  background-color: rgb(252, 219, 184);
+  /*background-color: rgb(253, 245, 238);*/
+
+}
+
+@media (min-width: 48rem) {
+  main {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100 - 6.5rem - 3rem);
+  }
+}
+/*
+@media (min-width: 64rem) {
+  main {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100 - 7rem -3rem);
+  }
+} */

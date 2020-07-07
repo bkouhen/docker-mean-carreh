@@ -1,0 +1,38 @@
+<div class="expansion-container">
+  <mat-progress-bar mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-bar>
+  <mat-accordion *ngIf="users.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let user of users" [hideToggle]="user.readStatus === 0" (click)="updateUserReadStatus(user, user._id)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{user.email}}</mat-panel-title>
+        <mat-panel-description style="display: flex; justify-content: flex-end;">
+          <mat-icon color="warn" *ngIf="user.readStatus === 0" style="user-select: none;">notifications</mat-icon>
+          <mat-icon *ngIf="user.read && user.read === 1" style="user-select: none;">done</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="section">
+        <strong><p class="section_title">Identifiant :</p></strong>
+        <p>{{user._id || 'Non renseigné'}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Prénom :</p></strong>
+        <p>{{user.firstName || 'Non renseigné'}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Nom :</p></strong>
+        <p>{{user.lastName || 'Non renseigné'}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">Adresse :</p></strong>
+        <p>{{user.address || 'Non renseignée'}}</p>
+      </div>
+      <div class="section">
+        <strong><p class="section_title">N° de téléphone :</p></strong>
+        <p>{{user.phoneNumber || 'Non renseigné'}}</p>
+      </div>
+      <mat-action-row>
+        <button mat-raised-button color="warn" (click)="onDeleteUser(user._id)">Supprimer</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <p *ngIf="users.length <= 0 && !isLoading" class="info-text">Aucun utilisateur trouvé</p>
+</div>

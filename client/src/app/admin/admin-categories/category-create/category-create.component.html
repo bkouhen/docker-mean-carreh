@@ -1,0 +1,43 @@
+<div class="card_block">
+  <div class="go-back">
+    <a mat-button [routerLink]="editMode ? '../..' : '..'">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Retour</span>
+    </a>
+  </div>
+  <mat-card class="mat-elevation-z5">
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <form (ngSubmit)="onSubmit()" [formGroup]="categoryForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <mat-label>Titre</mat-label>
+        <input
+        matInput
+        type="text"
+        placeholder="Titre"
+        required
+        formControlName="title"
+        >
+        <mat-error *ngIf="categoryForm.get('title').hasError('required')">Ce champ est <strong>requis</strong></mat-error>
+      </mat-form-field>
+
+      <div class="control_array" formArrayName="subCategories">
+        <mat-form-field *ngFor="let subCategory of subControls; let i = index">
+          <mat-label>Sous-catégorie {{i+1}}</mat-label>
+          <input type="text" matInput required [placeholder]="'Sous-catégorie ' + (i+1)" [formControlName]="i">
+          <mat-icon matSuffix (click)="onRemoveSubCategory(i)" class="clear_icon">clear</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="sub_buttons">
+        <p>Sous-catégories : </p>
+        <button mat-icon-button color="primary" type="button" (click)="onAddSubCategory()"><mat-icon>add</mat-icon></button>
+        <button mat-raised-button type="button" (click)="onRemoveAllSubCategories()" [disabled]="checkSubCategoriesLength()" color="warn">Tout supprimer</button>
+      </div>
+      <div class="buttons">
+        <button [disabled]="!categoryForm.valid" mat-raised-button color="primary" type="submit">{{editMode ? 'Modifier' : 'Ajouter'}}</button>
+        <button mat-raised-button type="button" (click)="onResetForm()">Réinitialiser</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

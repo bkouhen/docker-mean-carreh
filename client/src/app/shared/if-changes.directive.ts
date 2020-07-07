@@ -1,0 +1,30 @@
+import { Directive, ViewContainerRef, TemplateRef, Input } from '@angular/core';
+
+@Directive({
+  selector: '[ifChanges]'
+})
+export class IfChangesDirective {
+  private currentValue: any;
+  private hasView = false;
+
+  constructor(
+    private viewContainer: ViewContainerRef,
+    private templateRef: TemplateRef<any>
+  ) { }
+
+  @Input() set ifChanges(val: any) {
+    if (val === 0) {
+      return;
+    }
+    if (!this.hasView) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+      this.hasView = true;
+    } else if (val !== this.currentValue) {
+      this.viewContainer.clear();
+      setTimeout(() => {
+        this.viewContainer.createEmbeddedView(this.templateRef);
+        this.currentValue = val;
+      }, 100);
+    }
+  }
+}
