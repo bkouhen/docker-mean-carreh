@@ -20,15 +20,15 @@ script:
   - docker push bkouhen/docker-mean-api
   - docker push bkouhen/docker-mean-nginx
 
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "eu-west-3"
-#   app: "docker-mean-carreh"
-#   env: "DockerMeanCarreh-env"
-#   bucket_name: "elasticbeanstalk-eu-west-3-804229121763"
-#   bucket_path: "docker-mean-carreh"
-#   on:
-#     branch: master
-#   access_key_id: $AWS_ACCESS_KEY_ID
-#   secret_access_key: $AWS_SECRET_ACCESS_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-3"
+  app: "docker-mean-carreh"
+  env: "DockerMeanCarreh-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-804229121763"
+  bucket_path: "docker-mean-carreh"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
 
