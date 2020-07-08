@@ -1,42 +1,16 @@
-version: '3'
+version: '3.2'
 
 services:
     client:
-        image: docker-mean-client:latest
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./client
-        volumes:
-            - /app/node_modules
-            - ./client:/app
+        image: bkouhen/docker-mean-client:latest
+        restart: always
         depends_on: 
             - api
     api:
-        image: docker-mean-api:latest
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./backend
-        volumes: 
-            - /app/node_modules
-            - ./backend:/app
-            - ./static:/app/static
-        depends_on: 
-            - database
+        image: bkouhen/docker-mean-api:latest
+        restart: always
     nginx:
-        image: docker-mean-nginx:latest
-        build: 
-            dockerfile: Dockerfile.dev
-            context: ./nginx
-        volumes: 
-            - ./static:/app/static
+        image: bkouhen/docker-mean-nginx:latest
+        restart: always
         ports: 
             - "80:80"
-        restart: always
-    database:
-        image: mongo
-        restart: always
-        volumes: 
-            - database-volume:/data/db
-
-volumes:
-    database-volume:

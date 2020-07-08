@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+    api:
+        volumes: 
+            - static-volume:/app/static
+
+    nginx:
+        volumes: 
+            - static-volume:/app/static
+
+volumes:
+    static-volume:

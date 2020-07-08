@@ -1,0 +1,34 @@
+version: '3.2'
+
+services:
+    client:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./client
+        volumes:
+            - /app/node_modules
+            - ./client:/app
+    api:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./backend
+        volumes: 
+            - /app/node_modules
+            - ./backend:/app
+            - ./static:/app/static
+        depends_on: 
+            - database
+    nginx:
+        build: 
+            dockerfile: Dockerfile.dev
+            context: ./nginx
+        volumes: 
+            - ./static:/app/static
+    database:
+        image: mongo
+        restart: always
+        volumes: 
+            - database-volume:/data/db
+
+volumes:
+    database-volume:
