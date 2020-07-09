@@ -11,6 +11,7 @@ EXPOSE 4200
 COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY ./nginx/docker-entrypoint.sh /
 COPY --from=builder /app/dist/client /usr/share/nginx/html
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD ["nginx", "-g", "daemon off;"]
 
