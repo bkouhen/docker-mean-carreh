@@ -7,11 +7,16 @@ const errorHandler = (message, status) => {
 }
 
 exports.updateBackground = (req, res, next) => {
-    //const url = req.protocol + '://' + req.get('host');
-    const url = req.get('origin');
+    let host = req.get('host');
+    const port = host.split(':')[1];
+    if (port === '80' || port === '443') {
+        host = host.split(':')[0]
+    }
+    const url = req.get('x-forwarded-proto') + '://' + host;
+    //const url = req.get('origin');
     const files = req.files;
     let newFiles = [];
-    let imageFiles = [];
+    let imageFiles = []; 
     if (!req.body.notUpdatedPos) {
         for (let file of files) {
             const i = files.indexOf(file);

@@ -1,5 +1,5 @@
 server {
-  listen 4200;
+  listen ${NGINX_CLIENT_PORT};
 
   location / {
     root /usr/share/nginx/html;

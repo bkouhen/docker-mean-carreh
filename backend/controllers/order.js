@@ -1,10 +1,14 @@
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const hbs = require('nodemailer-express-handlebars');
+const secrets = require('../secrets');
 
 const env = process.env.NODE_ENV;
-const url = process.env.url;
+const SG_API_KEY = secrets.read('sg_api_key') || process.env.SG_API_KEY
+const SG_SENDER = secrets.read('sg_sender') || process.env.SG_SENDER
 const contact_email = process.env.CONTACT_EMAIL;
+let url = '';
+
 let top_background = url + process.env.top_background;
 let carreh_logo = url + process.env.carreh_logo;
 let fb_logo = url + process.env.fb_logo;
@@ -19,7 +23,7 @@ if (env === 'development') {
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
-        api_key: process.env.SG_API_KEY
+        api_key: SG_API_KEY
     }
 }))
 
@@ -44,6 +48,12 @@ const errorHandler = (message, status) => {
 }
 
 exports.createOrder = (req, res, next) => {
+    let host = req.get('host');
+    const port = host.split(':')[1];
+    if (port === '80' || port === '443') {
+        host = host.split(':')[0]
+    }
+    url = req.get('x-forwarded-proto') + '://' + host;
     const userId = req.body.userId;
     User.findOne({email : req.body.email})
     .then((user) => {
@@ -95,7 +105,7 @@ exports.createOrder = (req, res, next) => {
             if (env === 'development') {
                 return transporter.sendMail({
                     to: createdOrder.email,
-                    from: process.env.SG_SENDER,
+                    from: SG_SENDER,
                     subject: 'Merci pour votre commande !',
                     template: 'order_conf',
                     context: {
@@ -141,7 +151,7 @@ exports.createOrder = (req, res, next) => {
             }
             return transporter.sendMail({
                 to: createdOrder.email,
-                from: process.env.SG_SENDER,
+                from: SG_SENDER,
                 subject: 'Merci pour votre commande !',
                 template: 'order_conf',
                 context: {

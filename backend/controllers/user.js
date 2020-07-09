@@ -4,10 +4,15 @@ const uid = require('uid-safe');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const hbs = require('nodemailer-express-handlebars');
+const secrets = require('../secrets');
 
 const env = process.env.NODE_ENV;
-const url = process.env.url;
+const JWT_KEY = secrets.read('jwt_key') || process.env.JWT_KEY;
+const SG_API_KEY = secrets.read('sg_api_key') || process.env.SG_API_KEY
+const SG_SENDER = secrets.read('sg_sender') || process.env.SG_SENDER
 const contact_email = process.env.CONTACT_EMAIL;
+let url = '';
+
 let top_background = url + process.env.top_background;
 let carreh_logo = url + process.env.carreh_logo;
 let fb_logo = url + process.env.fb_logo;
@@ -22,7 +27,7 @@ if (env === 'development') {
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
-        api_key: process.env.SG_API_KEY
+        api_key: SG_API_KEY
     }
 }))
 
@@ -46,6 +51,12 @@ const errorHandler = (message, status) => {
 }
 
 exports.createUser = (req, res, next) => {
+    let host = req.get('host');
+    const port = host.split(':')[1];
+    if (port === '80' || port === '443') {
+        host = host.split(':')[0]
+    }
+    url = req.get('x-forwarded-proto') + '://' + host;
     User.findOne({email : req.body.email})
     .then((user) => {
         if (user) {
@@ -65,7 +76,7 @@ exports.createUser = (req, res, next) => {
         });
         return user.save().then(createdUser => {
             const payload = {email: createdUser.email, userId: createdUser._id, role: createdUser.role, xsrfToken: uid.sync(18)};
-            const jwt_token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '1h'});
+            const jwt_token = jwt.sign(payload, JWT_KEY, {expiresIn: '1h'});
             res.cookie('access_token', jwt_token, {httpOnly: true, secure: false});
             res.status(201).json({
                 message : 'User created successfully',
@@ -77,7 +88,7 @@ exports.createUser = (req, res, next) => {
             if (env === 'development') {
                 return transporter.sendMail({
                     to: createdUser.email,
-                    from: process.env.SG_SENDER,
+                    from: SG_SENDER,
                     subject: 'Bienvenue chez Carre H Spa',
                     template: 'signup',
                     context: {
@@ -116,7 +127,7 @@ exports.createUser = (req, res, next) => {
             }
             return transporter.sendMail({
                 to: createdUser.email,
-                from: process.env.SG_SENDER,
+                from: SG_SENDER,
                 subject: 'Bienvenue chez Carre H Spa',
                 template: 'signup',
                 context: {
@@ -158,7 +169,7 @@ exports.loginUser = (req, res, next) => {
             throw errorHandler('[Error] : Authentication fail - Password not correct', 401);
         }
         const payload = {email: fetchedUser.email, userId: fetchedUser._id, role: fetchedUser.role, xsrfToken: uid.sync(18)};
-        const jwt_token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '1h'});
+        const jwt_token = jwt.sign(payload, JWT_KEY, {expiresIn: '1h'});
         res.cookie('access_token', jwt_token, {httpOnly: true, secure: false, maxAge: 4000000});
         res.status(200).json({
             message : 'User logged in successfully',
@@ -348,6 +359,12 @@ exports.checkProfileComplete = (req, res, next) => {
 }
 
 exports.sendContactMail = (req, res, next) => {
+    let host = req.get('host');
+    const port = host.split(':')[1];
+    if (port === '80' || port === '443') {
+        host = host.split(':')[0]
+    }
+    url = req.get('x-forwarded-proto') + '://' + host;
     console.log(req.body);
     const name = req.body.name;
     const email = req.body.email;
@@ -358,7 +375,7 @@ exports.sendContactMail = (req, res, next) => {
     if (env === 'development') {
         return transporter.sendMail({
             to: process.env.CONTACT_EMAIL,
-            from: process.env.SG_SENDER,
+            from: SG_SENDER,
             subject: 'Demande d\'information',
             template: 'contact',
             context: {
@@ -400,7 +417,7 @@ exports.sendContactMail = (req, res, next) => {
     }
     return transporter.sendMail({
         to: process.env.CONTACT_EMAIL,
-        from: process.env.SG_SENDER,
+        from: SG_SENDER,
         subject: 'Demande d\'information',
         template: 'contact',
         context: {
@@ -428,6 +445,12 @@ exports.sendContactMail = (req, res, next) => {
     })}
 
     exports.resetPassword = (req, res, next) => {
+        let host = req.get('host');
+        const port = host.split(':')[1];
+        if (port === '80' || port === '443') {
+            host = host.split(':')[0]
+        }
+        url = req.get('x-forwarded-proto') + '://' + host;
         let token;
         User.findOne({email : req.body.email})
         .then(user => {
@@ -446,7 +469,7 @@ exports.sendContactMail = (req, res, next) => {
             if (env === 'development') {
                 return transporter.sendMail({
                     to: req.body.email,
-                    from: process.env.SG_SENDER,
+                    from: SG_SENDER,
                     subject: 'Réiniatilisation de votre mot de passe',
                     template: 'reset_password',
                     context: {
@@ -486,7 +509,7 @@ exports.sendContactMail = (req, res, next) => {
             }
             return transporter.sendMail({
                 to: req.body.email,
-                from: process.env.SG_SENDER,
+                from: SG_SENDER,
                 subject: 'Réiniatilisation de votre mot de passe',
                 template: 'reset_password',
                 context: {

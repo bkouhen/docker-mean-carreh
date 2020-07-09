@@ -21,16 +21,16 @@ script:
   - docker push bkouhen/docker-mean-api
   - docker push bkouhen/docker-mean-nginx
 
-deploy:
-    provider: codedeploy
-    revision_type: github
-    access_key_id: $AWS_ACCESS_KEY_ID
-    secret_access_key: $AWS_SECRET_ACCESS_KEY
-    application: CodeDeploy
-    deployment_group: CodeDeploy-DepGrp
-    region: "eu-west-3"
-    on:
-        branch: master
+# deploy:
+#     provider: codedeploy
+#     revision_type: github
+#     access_key_id: $AWS_ACCESS_KEY_ID
+#     secret_access_key: $AWS_SECRET_ACCESS_KEY
+#     application: CodeDeploy
+#     deployment_group: CodeDeploy-DepGrp
+#     region: "eu-west-3"
+#     on:
+#         branch: master
 
 # deploy:
 #   provider: elasticbeanstalk

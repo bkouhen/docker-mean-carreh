@@ -16,6 +16,14 @@ services:
             - /app/node_modules
             - ./backend:/app
             - ./static:/app/static
+        environment: 
+            - port=3000
+            - NODE_ENV=development
+            - top_background=cid:top_background
+            - carreh_logo=cid:carreh_logo
+            - fb_logo=cid:fb_logo
+            - ig_logo=cid:ig_logo
+            - CONTACT_EMAIL=b.kouhen@gmail.com
         depends_on: 
             - database
     nginx:
@@ -24,6 +32,10 @@ services:
             context: ./nginx
         volumes: 
             - ./static:/app/static
+        environment: 
+            - NGINX_PORT=80
+            - NGINX_CLIENT_PORT=4200
+            - NGINX_API_PORT=3000
     database:
         image: mongo
         restart: always

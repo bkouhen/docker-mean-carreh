@@ -1,3 +1,9 @@
-FROM nginx
+FROM nginx:1.19.0
 
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY ./default.conf.template /etc/nginx/conf.d/default.conf.template
+
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+CMD ["nginx", "-g", "daemon off;"]

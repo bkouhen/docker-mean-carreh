@@ -1,13 +1,42 @@
 version: '3.2'
 
 services:
+    client:
+        environment: 
+            - NGINX_CLIENT_PORT=4200
     api:
         volumes: 
             - static-volume:/app/static
-
+        environment: 
+            - port=3000
+            - NODE_ENV=production
+            - top_background=/images/email/top_background.jpg
+            - carreh_logo=/images/email/carreh_logo.png
+            - fb_logo=/images/email/fb_logo.png
+            - ig_logo=/images/email/ig_logo.png
+            - CONTACT_EMAIL=b.kouhen@gmail.com
+        secrets:
+            - mongo_atlas_password
+            - jwt_key
+            - sg_api_key
+            - sg_sender
     nginx:
         volumes: 
             - static-volume:/app/static
+        environment: 
+            - NGINX_PORT=80
+            - NGINX_CLIENT_PORT=4200
+            - NGINX_API_PORT=3000
 
 volumes:
     static-volume:
+
+secrets:
+    mongo_atlas_password:
+        external: true
+    jwt_key:
+        external: true
+    sg_api_key:
+        external: true
+    sg_sender:
+        external: true

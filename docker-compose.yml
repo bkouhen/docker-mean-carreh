@@ -12,5 +12,8 @@ services:
     nginx:
         image: bkouhen/docker-mean-nginx:latest
         restart: always
+        depends_on: 
+            - api
+            - client
         ports: 
             - "80:80"

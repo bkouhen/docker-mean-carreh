@@ -1,5 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Docker related
+docker-compose.override.yml
+docker_install_script.sh
+docker_uninstall_script.sh
+Dockerrun.aws.json
+gen_secrets.bat
+gen_secrets.sh
+
 # compiled output
 /static
 /dist

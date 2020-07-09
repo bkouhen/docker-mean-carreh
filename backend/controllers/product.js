@@ -7,8 +7,13 @@ const errorHandler = (message, status) => {
 }
 
 exports.createProduct = (req, res, next) => {
-    //const url = req.protocol + '://' + req.get('host');
-    const url = req.get('origin');
+    let host = req.get('host');
+    const port = host.split(':')[1];
+    if (port === '80' || port === '443') {
+        host = host.split(':')[0]
+    }
+    const url = req.get('x-forwarded-proto') + '://' + host;
+    //const url = req.get('origin');
     const newProduct = new Product({
         title: req.body.title,
         category: req.body.category,

@@ -1,20 +1,19 @@
 const jwt = require('jsonwebtoken');
+const secrets = require('../secrets');
+const JWT_KEY = secrets.read('jwt_key') || process.env.JWT_KEY;
 
 module.exports = (req, res, next) => {
     console.log('Checking authorization');
-    console.log(req.headers);
-    console.log(req.cookies);
     try {
         const xsrfToken = req.headers.authorization.split(' ')[1];
         const jwt_token = req.cookies.access_token;
-        console.log(xsrfToken, jwt_token);
         if ((xsrfToken || jwt_token) === 'undefined' || (xsrfToken || jwt_token) === 'null') {
             const thrownError = new Error('[Error] : Authentication fail - No token found');
             thrownError.status = 401;
             throw thrownError
         } 
         //const decodedToken = jwt.verify(xsrfToken, process.env.JWT_KEY);
-        jwt.verify(jwt_token, process.env.JWT_KEY, (err, decoded) => {
+        jwt.verify(jwt_token, JWT_KEY, (err, decoded) => {
             console.log(decoded);
             console.log(err);
             if (decoded.xsrfToken !== xsrfToken) {

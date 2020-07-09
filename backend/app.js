@@ -3,7 +3,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const secrets = require('./secrets');
+
 const env = process.env.NODE_ENV;
+const MONGO_ATLAS_PASSWORD = secrets.read('mongo_atlas_password') || process.env.MONGO_ATLAS_PASSWORD;
 let MONGO_URI = '';
 
 const userRoutes = require('./routes/user');
@@ -20,7 +23,7 @@ if (env === 'development') {
     MONGO_URI = "mongodb://database:27017/docker-mean-db?retryWrites=true&w=majority";
 } else if (env === 'production') {
     console.log('Production environment');
-    MONGO_URI = "mongodb+srv://bob:" + process.env.MONGO_ATLAS_PASSWORD + "@cluster0-t7rkc.mongodb.net/docker-mean-db?retryWrites=true&w=majority";
+    MONGO_URI = "mongodb+srv://bob:" + MONGO_ATLAS_PASSWORD + "@cluster0-t7rkc.mongodb.net/docker-mean-db?retryWrites=true&w=majority";
 }
 
 mongoose.connect(MONGO_URI, {useNewUrlParser : true, useUnifiedTopology : true})
@@ -39,7 +42,8 @@ app.use('/images/background', express.static(path.join(__dirname, './static/imag
 app.use('/images/email', express.static(path.join(__dirname, './static/images/email')));
 
 app.use((req, res, next) => {
-    console.log('Cookies: ', req.cookies);
+    //console.log('Cookies: ', req.cookies);
+    console.log('ENV', process.env);
     /* var allowedOrigins = ['http://52.47.77.66', 'https://52.47.77.66', 'http://carreh.tk', 'http://www.carreh.tk', 'https://carreh.tk', 'https://www.carreh.tk', 'http://localhost:4200'];
     var origin = req.headers.origin;
     if(allowedOrigins.indexOf(origin) > -1){
