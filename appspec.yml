@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: ./test.sh
+  - source: ./launch_app.sh
     destination: /var/app
   - source: ./docker-compose.yml
     destination: /var/app
