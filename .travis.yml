@@ -11,14 +11,18 @@ services:
 #   - docker run bkouhen/multi-container-client-test npm run e2e:ci
 
 # after_success:
+
+# script:
+#   - docker image build -t bkouhen/docker-mean-client ./client
+#   - docker image build -t bkouhen/docker-mean-api ./backend
+#   - docker image build -t bkouhen/docker-mean-nginx ./nginx
+#   - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
+#   - docker push bkouhen/docker-mean-client
+#   - docker push bkouhen/docker-mean-api
+#   - docker push bkouhen/docker-mean-nginx
+
 script:
-  - docker image build -t bkouhen/docker-mean-client ./client
-  - docker image build -t bkouhen/docker-mean-api ./backend
-  - docker image build -t bkouhen/docker-mean-nginx ./nginx
-  - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push bkouhen/docker-mean-client
-  - docker push bkouhen/docker-mean-api
-  - docker push bkouhen/docker-mean-nginx
+    - echo "Hello world !"
 
 deploy:
     provider: codedeploy
@@ -31,7 +35,7 @@ deploy:
     on:
         branch: master
 
-        
+
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "eu-west-3"
