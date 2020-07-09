@@ -12,17 +12,14 @@ services:
 
 # after_success:
 
-# script:
-#   - docker image build -t bkouhen/docker-mean-client ./client
-#   - docker image build -t bkouhen/docker-mean-api ./backend
-#   - docker image build -t bkouhen/docker-mean-nginx ./nginx
-#   - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
-#   - docker push bkouhen/docker-mean-client
-#   - docker push bkouhen/docker-mean-api
-#   - docker push bkouhen/docker-mean-nginx
-
 script:
-    - echo "Hello world !"
+  - docker image build -t bkouhen/docker-mean-client ./client
+  - docker image build -t bkouhen/docker-mean-api ./backend
+  - docker image build -t bkouhen/docker-mean-nginx ./nginx
+  - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bkouhen/docker-mean-client
+  - docker push bkouhen/docker-mean-api
+  - docker push bkouhen/docker-mean-nginx
 
 deploy:
     provider: codedeploy
