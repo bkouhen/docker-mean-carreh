@@ -35,7 +35,6 @@ deploy:
     on:
         branch: master
 
-
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "eu-west-3"
