@@ -9,7 +9,7 @@ files:
     destination: /var/app
 
 hooks:
-  BeforeInstall:
+  AfterInstall:
     - location: ./test.sh
       timeout: 300
       runas: root
