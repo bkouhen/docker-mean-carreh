@@ -1,10 +1,15 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: ./test.sh
     destination: /var/app
+  - source: ./docker-compose.yml
+    destination: /var/app
+  - source: ./docker-compose.prod.yml
+    destination: /var/app
+
 hooks:
-    BeforeInstall:
-        - location: ./test.sh
-          timeout: 300
-          runas: root
+  BeforeInstall:
+    - location: ./test.sh
+      timeout: 300
+      runas: root
