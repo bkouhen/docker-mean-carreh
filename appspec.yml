@@ -10,6 +10,6 @@ files:
 
 hooks:
   AfterInstall:
-    - location: test.sh
+    - location: launch_app.sh
       timeout: 300
       runas: root
