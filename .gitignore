@@ -10,6 +10,7 @@ gen_secrets.sh
 pull_images.sh
 
 # compiled output
+/clientcopy
 /static
 /dist
 /tmp
