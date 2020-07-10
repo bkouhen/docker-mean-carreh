@@ -9,17 +9,10 @@ const SG_SENDER = secrets.read('sg_sender') || process.env.SG_SENDER
 const contact_email = process.env.CONTACT_EMAIL;
 let url = '';
 
-let top_background = url + process.env.top_background;
-let carreh_logo = url + process.env.carreh_logo;
-let fb_logo = url + process.env.fb_logo;
-let ig_logo = url + process.env.ig_logo;
-
-if (env === 'development') {
-    top_background = process.env.top_background;
-    carreh_logo = process.env.carreh_logo;
-    fb_logo = process.env.fb_logo;
-    ig_logo = process.env.ig_logo;
-}
+const top_background = process.env.top_background;
+const carreh_logo = process.env.carreh_logo;
+const fb_logo = process.env.fb_logo;
+const ig_logo = process.env.ig_logo;
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
@@ -163,10 +156,10 @@ exports.createOrder = (req, res, next) => {
                     price: createdOrder.price,
                     items: createdOrder.items,
                     url: url,
-                    top_background: top_background,
-                    carreh_logo: carreh_logo,
-                    fb_logo: fb_logo,
-                    ig_logo: ig_logo,
+                    top_background: url + top_background,
+                    carreh_logo: url + carreh_logo,
+                    fb_logo: url + fb_logo,
+                    ig_logo: url + ig_logo,
                     contact_email: contact_email
                 }
             }).catch(error => {

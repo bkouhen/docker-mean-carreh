@@ -13,8 +13,6 @@ const env = process.env.NODE_ENV;
 const MONGO_ATLAS_PASSWORD = secrets.read('mongo_atlas_password') || process.env.MONGO_ATLAS_PASSWORD;
 let MONGO_URI = '';
 
-console.log(process.env);
-
 if (env === 'development') {
     console.log('Development environment');
     MONGO_URI = "mongodb://database:27017/docker-mean-db?retryWrites=true&w=majority";
