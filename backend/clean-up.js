@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
+const secrets = require('./secrets');
 
 const Background = require('./models/background');
 const Product = require('./models/product');
@@ -8,23 +9,27 @@ const Product = require('./models/product');
 let backgroundFileNames = [];
 let productFileNames = [];
 
-const MONGO_ATLAS_PASSWORD = 'KCOQEN4jquXHF3od';
+const env = process.env.NODE_ENV;
+const MONGO_ATLAS_PASSWORD = secrets.read('mongo_atlas_password') || process.env.MONGO_ATLAS_PASSWORD;
+let MONGO_URI = '';
 
-/* mongoose.connect("mongodb+srv://bob:" + MONGO_ATLAS_PASSWORD + "@cluster0-t7rkc.mongodb.net/carreh-db?retryWrites=true&w=majority", {useNewUrlParser : true, useUnifiedTopology : true})
+console.log(process.env);
+
+if (env === 'development') {
+    console.log('Development environment');
+    MONGO_URI = "mongodb://database:27017/docker-mean-db?retryWrites=true&w=majority";
+} else if (env === 'production') {
+    console.log('Production environment');
+    MONGO_URI = "mongodb+srv://bob:" + MONGO_ATLAS_PASSWORD + "@cluster0-t7rkc.mongodb.net/docker-mean-db?retryWrites=true&w=majority";
+}
+
+mongoose.connect(MONGO_URI, {useNewUrlParser : true, useUnifiedTopology : true})
 .then(() => {
     console.log('Connected to Database');
 })
 .catch(() => {
     console.log('Connection failed');
-}); */
-
-mongoose.connect("mongodb://database:27017/docker-mean-db?retryWrites=true&w=majority", {useNewUrlParser : true, useUnifiedTopology : true})
-.then(() => {
-    console.log('Connected to Database');
-})
-.catch(() => {
-    console.log('Connection failed');
-}); 
+});
 
 Background.find()
     .then(background => {
