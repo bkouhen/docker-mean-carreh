@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: ./launch_app.sh
+  - source: ./launch_app_ec2.sh
     destination: /var/app
   - source: ./docker-compose.yml
     destination: /var/app
@@ -10,6 +10,6 @@ files:
 
 hooks:
   AfterInstall:
-    - location: launch_app.sh
+    - location: launch_app_ec2.sh
       timeout: 300
       runas: root

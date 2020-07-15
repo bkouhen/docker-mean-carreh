@@ -1,0 +1,167 @@
+user nginx;
+worker_processes  auto;
+
+events {
+    # How many connections each process can accept
+    # max_concurrent_connections = worker_processes*worker_connections
+    worker_connections  1024;
+}
+
+http {
+    # Access Logs
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    # Handle Mime Types
+    include mime.types;
+
+    # Remove Server Nginx from Headers
+    server_tokens off;
+
+    # Handle Gzipping
+    gzip on;
+    gzip_comp_level 3;
+    gzip_types text/css;
+    gzip_types text/javascript;
+    gzip_types application/javascript;
+
+    # Handle Rate Limiting
+    #limit_req_zone $request_uri zone=MYZONE:10m rate=10r/s;
+
+    # Buffer size for POST submissions
+    client_body_buffer_size 10k;
+    client_max_body_size 8m;
+
+    # Buffer size for Headers
+    client_header_buffer_size 1k;
+
+    # Skip buffering for static files (when sending Data from Server Disk)
+    sendfile on;
+
+    # Optimise the size of Data packets sent to client
+    tcp_nopush on;
+
+    upstream client {
+        server client:${NGINX_CLIENT_PORT};
+    }
+
+    upstream api {
+        server api:${NGINX_API_PORT};
+    }
+
+    server {
+        server_name ${NGINX_SERVER_NAME};
+        listen ${NGINX_PORT};
+
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+        }
+        
+        return 301 https://$host$request_uri;
+    }
+
+    server {
+        #Server configuration
+        server_name ${NGINX_SERVER_NAME};
+        listen ${NGINX_TLS_PORT} ssl http2;
+
+        if ($scheme = http) {
+            return 301 https://$host$request_uri;
+        }
+
+        # Managed by Certbot
+        ssl_certificate /etc/nginx/certs/fullchain.pem;
+        ssl_certificate_key /etc/nginx/certs/privkey.pem;
+        include /etc/nginx/ssl-options/options-ssl-nginx.conf;
+        ssl_dhparam /etc/nginx/ssl-options/ssl-dhparams.pem;
+
+        # Enable Security Headers
+        add_header Strict-Transport-Security "max-age=31536000" always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Frame-Options "DENY" always;
+
+        # Enable Content Security Policy
+        #add_header Content-Security-Policy "frame src 'self'; default-src 'self'; script-src 'self'" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+        #Rate Limiting (per request)
+        #limit_req zone=MYZONE burst=5 nodelay;
+
+        location / {
+            proxy_pass http://client;
+            access_log /var/log/nginx/client.access.log;
+            proxy_http_version 1.1;
+            proxy_set_header proxied_header nginx;
+            proxy_set_header Host $host:$server_port;
+
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            add_header proxied_by nginx;
+        }
+
+        location /images {
+            root /app/static;
+            access_log /var/log/nginx/images.access.log;
+            add_header Cache-Control public;
+            add_header Pragma public;
+            add_header Vary Accept-Encoding;
+            expires 1h;
+        }
+
+        location /api {
+            proxy_pass http://api;
+            access_log /var/log/nginx/api.access.log;
+            proxy_http_version 1.1;
+            proxy_set_header proxied_header nginx;
+            proxy_set_header Host $host:$server_port;
+
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            add_header proxied_by nginx;
+        }
+
+        location /sockjs-node {
+            proxy_pass http://client;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+        }
+
+        location /admin {
+            auth_basic "Secure Area";
+            auth_basic_user_file /etc/nginx/certs/.htpasswd;
+
+            proxy_pass http://client;
+            proxy_http_version 1.1;
+            proxy_set_header proxied_header nginx;
+            proxy_set_header Host $host:$server_port;
+
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            add_header proxied_client_by nginx;
+        }
+    }
+
+}
+
+
+

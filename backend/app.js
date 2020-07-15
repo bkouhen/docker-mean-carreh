@@ -43,7 +43,6 @@ app.use('/images/email', express.static(path.join(__dirname, './static/images/em
 
 app.use((req, res, next) => {
     //console.log('Cookies: ', req.cookies);
-    console.log('ENV', process.env);
     /* var allowedOrigins = ['http://52.47.77.66', 'https://52.47.77.66', 'http://carreh.tk', 'http://www.carreh.tk', 'https://carreh.tk', 'https://www.carreh.tk', 'http://localhost:4200'];
     var origin = req.headers.origin;
     if(allowedOrigins.indexOf(origin) > -1){

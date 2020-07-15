@@ -25,18 +25,20 @@ services:
             - static-volume:/app/static
         environment: 
             - NGINX_PORT=80
+            - NGINX_TLS_PORT=443
             - NGINX_CLIENT_PORT=4200
             - NGINX_API_PORT=3000
-
+            - NGINX_WWW_SERVER_NAME=www.carreh.tk
+            - NGINX_SERVER_NAME=carreh.tk
 volumes:
     static-volume:
 
 secrets:
     mongo_atlas_password:
-        external: true
+        file: mongo_atlas_password.txt
     jwt_key:
-        external: true
+        file: jwt_key.txt
     sg_api_key:
-        external: true
+        file: sg_api_key.txt
     sg_sender:
-        external: true
+        file: sg_sender.txt

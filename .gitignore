@@ -2,15 +2,10 @@
 
 # Docker related
 docker-compose.override.yml
-docker_install_script.sh
-docker_uninstall_script.sh
-Dockerrun.aws.json
-gen_secrets.bat
-gen_secrets.sh
-pull_images.sh
 
 # compiled output
-/clientcopy
+/scripts
+/ssl
 /static
 /dist
 /tmp
