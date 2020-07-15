@@ -25,7 +25,7 @@ htpasswd -bc /etc/nginx/certs/.htpasswd admin password;
 envsubst '${NGINX_CLIENT_PORT} ${NGINX_API_PORT} ${NGINX_PORT} ${NGINX_TLS_PORT} ${NGINX_WWW_SERVER_NAME} ${NGINX_SERVER_NAME}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf;
 
 # Certbot emission/renewal as a background process
-$(while :; do /docker/certbot.sh; sleep "${RENEW_INTERVAL:-12h}"; done) &
+$(while :; do /certbot.sh; sleep "${RENEW_INTERVAL:-12h}"; done) &
 
 # Check for changes in certificate (renewal or first time) and send process to background
 $(while inotifywait -e close_write /etc/nginx/certs; do nginx -s reload; done) &
