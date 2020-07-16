@@ -15,6 +15,9 @@ http {
 
   access_log  /var/log/nginx/access.log  main;
 
+  # Handle Mime Types
+  include mime.types;
+
   # Handle Gzipping
   gzip on;
   gzip_comp_level 3;
