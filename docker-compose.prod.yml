@@ -22,7 +22,9 @@ services:
             - sg_sender
     nginx:
         volumes: 
-            - static-volume:/app/static
+            - static-volume:/app/static            
+            - certs-volume:/etc/letsencrypt
+            - certs-volume2:/etc/nginx/certs
         environment: 
             - NGINX_PORT=80
             - NGINX_TLS_PORT=443
@@ -32,13 +34,19 @@ services:
             - NGINX_SERVER_NAME=carreh.tk
 volumes:
     static-volume:
+    certs-volume:
+    certs-volume2:
 
 secrets:
     mongo_atlas_password:
         file: mongo_atlas_password.txt
+        name: mongo_atlas_password_v${MONGO_PWD_VERSION}
     jwt_key:
         file: jwt_key.txt
+        name: jwt_key_v${JWT_KEY_VERSION}
     sg_api_key:
         file: sg_api_key.txt
+        name: sg_api_key_v${SG_API_VERSION}
     sg_sender:
         file: sg_sender.txt
+        name: sg_sender_v${SG_SENDER_VERSION}
