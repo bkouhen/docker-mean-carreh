@@ -56,12 +56,16 @@ http {
         server api:${NGINX_API_PORT};
     }
 
+    upstream portainer {
+        server portainer:9000;
+    }
+
     server {
         server_name ${NGINX_WWW_SERVER_NAME};
         listen ${NGINX_PORT};
         listen ${NGINX_TLS_PORT} ssl;
 
-        # Managed by Certbot
+        # Self signed certificate
         ssl_certificate /etc/nginx/certs/self.crt;
         ssl_certificate_key /etc/nginx/certs/self.key;
 
@@ -105,7 +109,7 @@ http {
             add_header proxied_client_by nginx;
         }
 
-        location ~* \.(css|js)$ {
+        location ~* ^\/\w*\.(css|js) {
             proxy_pass http://client;
             access_log off;
             proxy_http_version 1.1;
@@ -177,6 +181,33 @@ http {
 
             add_header proxied_client_by nginx;
         }
+
+        location /portainer/ {
+             proxy_http_version 1.1;
+             proxy_set_header Host $host;
+             proxy_set_header Connection "";
+             proxy_pass http://portainer/;
+         }
+
+         location /portainer/api/websocket/ {
+             proxy_set_header Upgrade $http_upgrade;
+             proxy_set_header Connection "upgrade";
+             proxy_http_version 1.1;
+             proxy_pass http://portainer/api/websocket/;
+         }
+
+         
+        location ~* \/portainer\/\w*\.(js|css)$ {
+            auth_basic "Secure Area";
+            auth_basic_user_file /etc/nginx/certs/.htpasswd;
+            
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header Connection "";
+            proxy_pass http://portainer;
+        }
+
+         
     }
 
 }

@@ -7,7 +7,6 @@ COPY ./ ./
 RUN npm run build
 
 FROM nginx:1.19.0
-EXPOSE 4200
 COPY ./nginx/nginx.conf.template /etc/nginx/nginx.conf.template
 COPY ./nginx/docker-entrypoint.sh /
 COPY --from=builder /app/dist/client /usr/share/nginx/html

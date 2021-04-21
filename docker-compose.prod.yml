@@ -32,10 +32,14 @@ services:
             - NGINX_API_PORT=3000
             - NGINX_WWW_SERVER_NAME=www.carreh.tk
             - NGINX_SERVER_NAME=carreh.tk
+    syslog:
+        volumes:
+            - dockerlogs-volume:/var/log/dockerlogs
 volumes:
     static-volume:
     certs-volume:
     certs-volume2:
+    dockerlogs-volume:
 
 secrets:
     mongo_atlas_password:

@@ -52,6 +52,7 @@ http {
         server api:${NGINX_API_PORT};
     }
 
+
     server {
         server_name ${NGINX_SERVER_NAME};
         listen ${NGINX_PORT};
@@ -180,6 +181,7 @@ http {
 
             add_header proxied_client_by nginx;
         }
+
     }
 
 }

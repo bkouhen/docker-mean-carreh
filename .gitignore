@@ -4,6 +4,8 @@
 docker-compose.override.yml
 
 # compiled output
+/elk
+/filebeat
 /scripts
 /ssl
 /static

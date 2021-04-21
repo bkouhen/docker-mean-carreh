@@ -60,7 +60,9 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
 
   constructor(private appointmentsService: AppointmentsService, private dialog: MatDialog, private authService: AuthService, private router: Router) {
     const currentYear = new Date().getUTCFullYear();
-    this.minDate = new Date();
+    this.minDate = new Date(new Date());
+    this.minDate.setDate(this.minDate.getDate() + 1);
+    this.minDate.setUTCHours(0,0,0,0);
     this.maxDate = new Date(currentYear, 11, 31);
     for (var i=9; i < 12; i++) {
       for (var j=0; j< 60; j+= 15) {

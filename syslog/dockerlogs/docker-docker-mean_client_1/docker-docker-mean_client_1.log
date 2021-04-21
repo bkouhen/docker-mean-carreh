@@ -1,0 +1,67 @@
+2020-08-07T11:54:50+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T11:54:50+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: > carre-h@0.0.0 start:ci /app
+2020-08-07T11:54:50+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: > ng serve --host=0.0.0.0 --disable-host-check
+2020-08-07T11:54:50+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: WARNING: This is a simple server for use in testing or debugging Angular applications
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: locally. It hasn't been reviewed for security issues.
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Binding this server to an open connection can result in compromising your application or
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: computer. Using a different host than the one passed to the "--host" flag might result in
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: websocket connection issues. You might need to use "--disableHostCheck" if that's the
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: case.
+2020-08-07T11:55:04+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: WARNING: Running a server with --disable-host-check is a security risk. See https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a for more information.
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {admin-admin-module} admin-admin-module.js, admin-admin-module.js.map (admin-admin-module) 298 kB  [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {auth-auth-module} auth-auth-module.js, auth-auth-module.js.map (auth-auth-module) 37.4 kB  [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {main} main.js, main.js.map (main) 686 kB [initial] [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 141 kB [initial] [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {runtime} runtime.js, runtime.js.map (runtime) 9.04 kB [entry] [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {styles} styles.js, styles.js.map (styles) 407 kB [initial] [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {vendor} vendor.js, vendor.js.map (vendor) 5.78 MB [initial] [rendered]
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Date: 2020-08-07T11:56:01.038Z - Hash: 83119e1e67dd3bb8d99d - Time: 55675ms
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: ** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **
+2020-08-07T11:56:01+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: : Compiled successfully.
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Date: 2020-08-07T15:55:21.973Z - Hash: 2e7aa3b57d73de1b6c9b
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 5 unchanged chunks
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {admin-admin-module} admin-admin-module.js, admin-admin-module.js.map (admin-admin-module) 298 kB  [rendered]
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {main} main.js, main.js.map (main) 686 kB [initial] [rendered]
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Time: 10913ms
+2020-08-07T15:55:21+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: : Compiled successfully.
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Date: 2020-08-07T15:58:02.274Z - Hash: 3a7c999ad4b651bd12b1
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 5 unchanged chunks
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {admin-admin-module} admin-admin-module.js, admin-admin-module.js.map (admin-admin-module) 298 kB  [rendered]
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {main} main.js, main.js.map (main) 686 kB [initial] [rendered]
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Time: 8120ms
+2020-08-07T15:58:02+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: : Compiled successfully.
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Date: 2020-08-07T15:58:46.090Z - Hash: 5edaa45dd1db0552dcd2
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: 5 unchanged chunks
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {admin-admin-module} admin-admin-module.js, admin-admin-module.js.map (admin-admin-module) 298 kB  [rendered]
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: chunk {main} main.js, main.js.map (main) 686 kB [initial] [rendered]
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: Time: 8140ms
+2020-08-07T15:58:46+00:00 172.22.0.1 docker-docker-mean_client_1[1822]: : Compiled successfully.
+2021-01-06T15:54:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: 
+2021-01-06T15:54:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: > carre-h@0.0.0 start:ci /app
+2021-01-06T15:54:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: > ng serve --host=0.0.0.0 --disable-host-check
+2021-01-06T15:54:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: 
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: WARNING: This is a simple server for use in testing or debugging Angular applications
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: locally. It hasn't been reviewed for security issues.
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: 
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: Binding this server to an open connection can result in compromising your application or
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: computer. Using a different host than the one passed to the "--host" flag might result in
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: websocket connection issues. You might need to use "--disableHostCheck" if that's the
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: case.
+2021-01-06T15:54:59+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: WARNING: Running a server with --disable-host-check is a security risk. See https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a for more information.
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: 
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {admin-admin-module} admin-admin-module.js, admin-admin-module.js.map (admin-admin-module) 298 kB  [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {auth-auth-module} auth-auth-module.js, auth-auth-module.js.map (auth-auth-module) 37.4 kB  [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {main} main.js, main.js.map (main) 686 kB [initial] [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 141 kB [initial] [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {runtime} runtime.js, runtime.js.map (runtime) 9.04 kB [entry] [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {styles} styles.js, styles.js.map (styles) 407 kB [initial] [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: chunk {vendor} vendor.js, vendor.js.map (vendor) 5.78 MB [initial] [rendered]
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: Date: 2021-01-06T15:55:43.400Z - Hash: fec7e941805e97e65ac9 - Time: 43485ms
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: ** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **
+2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: : Compiled successfully.
