@@ -65,3 +65,69 @@
 2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: Date: 2021-01-06T15:55:43.400Z - Hash: fec7e941805e97e65ac9 - Time: 43485ms
 2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: ** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **
 2021-01-06T15:55:43+00:00 172.22.0.1 docker-docker-mean_client_1[1832]: : Compiled successfully.
+2021-04-21T14:50:55+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: > carre-h@0.0.0 start:ci
+2021-04-21T14:50:55+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: > ng serve --host=0.0.0.0 --disable-host-check
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: WARNING: This is a simple server for use in testing or debugging Angular applications
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: locally. It hasn't been reviewed for security issues.
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Binding this server to an open connection can result in compromising your application or
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: computer. Using a different host than the one passed to the "--host" flag might result in
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: websocket connection issues. You might need to use "--disableHostCheck" if that's the
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: case.
+2021-04-21T14:50:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: WARNING: Running a server with --disable-host-check is a security risk. See https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a for more information.
+2021-04-21T14:51:02+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/core : es2015 as esm2015
+2021-04-21T14:51:05+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/common : es2015 as esm2015
+2021-04-21T14:51:07+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/platform-browser : es2015 as esm2015
+2021-04-21T14:51:08+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/platform-browser-dynamic : es2015 as esm2015
+2021-04-21T14:51:09+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/animations : es2015 as esm2015
+2021-04-21T14:51:10+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/animations/browser : es2015 as esm2015
+2021-04-21T14:51:11+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/platform-browser/animations : es2015 as esm2015
+2021-04-21T14:51:13+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/forms : es2015 as esm2015
+2021-04-21T14:51:15+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/common/http : es2015 as esm2015
+2021-04-21T14:51:17+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/router : es2015 as esm2015
+2021-04-21T14:51:20+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/platform : es2015 as esm2015
+2021-04-21T14:51:21+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/bidi : es2015 as esm2015
+2021-04-21T14:51:21+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/collections : es2015 as esm2015
+2021-04-21T14:51:22+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/scrolling : es2015 as esm2015
+2021-04-21T14:51:23+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/portal : es2015 as esm2015
+2021-04-21T14:51:23+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/keycodes : es2015 as esm2015
+2021-04-21T14:51:24+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/overlay : es2015 as esm2015
+2021-04-21T14:51:25+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/observers : es2015 as esm2015
+2021-04-21T14:51:26+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/a11y : es2015 as esm2015
+2021-04-21T14:51:27+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/core : es2015 as esm2015
+2021-04-21T14:51:28+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/dialog : es2015 as esm2015
+2021-04-21T14:51:30+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/google-maps : es2015 as esm2015
+2021-04-21T14:51:34+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/button : es2015 as esm2015
+2021-04-21T14:51:35+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/form-field : es2015 as esm2015
+2021-04-21T14:51:36+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/text-field : es2015 as esm2015
+2021-04-21T14:51:37+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/input : es2015 as esm2015
+2021-04-21T14:51:38+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/datepicker : es2015 as esm2015
+2021-04-21T14:51:41+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/icon : es2015 as esm2015
+2021-04-21T14:51:43+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/toolbar : es2015 as esm2015
+2021-04-21T14:51:46+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/sidenav : es2015 as esm2015
+2021-04-21T14:51:48+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/divider : es2015 as esm2015
+2021-04-21T14:51:49+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/list : es2015 as esm2015
+2021-04-21T14:51:52+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/menu : es2015 as esm2015
+2021-04-21T14:51:54+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/card : es2015 as esm2015
+2021-04-21T14:51:56+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/progress-spinner : es2015 as esm2015
+2021-04-21T14:51:58+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/progress-bar : es2015 as esm2015
+2021-04-21T14:52:02+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/tabs : es2015 as esm2015
+2021-04-21T14:52:05+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/accordion : es2015 as esm2015
+2021-04-21T14:52:06+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/expansion : es2015 as esm2015
+2021-04-21T14:52:09+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/cdk/layout : es2015 as esm2015
+2021-04-21T14:52:10+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/snack-bar : es2015 as esm2015
+2021-04-21T14:52:12+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/badge : es2015 as esm2015
+2021-04-21T14:52:16+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Compiling @angular/material/select : es2015 as esm2015
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {admin-admin-module} admin-admin-module.js, admin-admin-module.js.map (admin-admin-module) 298 kB  [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {auth-auth-module} auth-auth-module.js, auth-auth-module.js.map (auth-auth-module) 37.4 kB  [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {main} main.js, main.js.map (main) 686 kB [initial] [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 141 kB [initial] [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {runtime} runtime.js, runtime.js.map (runtime) 9.04 kB [entry] [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {styles} styles.js, styles.js.map (styles) 407 kB [initial] [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: chunk {vendor} vendor.js, vendor.js.map (vendor) 5.78 MB [initial] [rendered]
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Date: 2021-04-21T14:52:32.175Z - Hash: f649322d6a39542ea9e5 - Time: 92928ms
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: ** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **
+2021-04-21T14:52:32+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: : Compiled successfully.
+2021-04-21T14:52:36+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Date: 2021-04-21T14:52:36.008Z - Hash: f649322d6a39542ea9e5
+2021-04-21T14:52:36+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: 7 unchanged chunks
+2021-04-21T14:52:36+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: Time: 3211ms
+2021-04-21T14:52:36+00:00 172.18.0.1 docker-docker-mean_client_1[1745]: : Compiled successfully.

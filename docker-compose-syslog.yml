@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+    client:
+        image: bkouhen/docker-mean-client:latest
+        restart: always
+        depends_on: 
+            - api
+    api:
+        image: bkouhen/docker-mean-api:latest
+        restart: always
+    nginx:
+        image: bkouhen/docker-mean-nginx:latest
+        restart: always
+        depends_on: 
+            - api
+            - client
+        ports: 
+            - "80:80"
+            - "443:443"
+    portainer:
+        image: portainer/portainer
+        hostname: portainer
+        command: -H unix:///var/run/docker.sock
+        restart: always
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer-volume:/data
+
+volumes:
+    portainer-volume:
