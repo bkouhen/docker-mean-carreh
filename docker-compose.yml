@@ -6,19 +6,9 @@ services:
         restart: always
         depends_on: 
             - api
-        logging: 
-            driver: syslog
-            options: 
-                syslog-address: "tcp://0.0.0.0:514"
-                tag: docker-{{.Name}}
     api:
         image: bkouhen/docker-mean-api:latest
         restart: always
-        logging: 
-            driver: syslog
-            options: 
-                syslog-address: "tcp://0.0.0.0:514"
-                tag: docker-{{.Name}}
     nginx:
         image: bkouhen/docker-mean-nginx:latest
         restart: always
@@ -28,24 +18,14 @@ services:
         ports: 
             - "80:80"
             - "443:443"
-        logging: 
-            driver: syslog
-            options: 
-                syslog-address: "tcp://0.0.0.0:514"
-                tag: docker-{{.Name}}
-    syslog:
-        image: bkouhen/docker-mean-syslog:latest
-        restart: always
-        ports:
-            - 514:514
-            - 514:514/udp
-        cap_add: 
-            - SYSLOG
     portainer:
         image: portainer/portainer
         hostname: portainer
         command: -H unix:///var/run/docker.sock
         restart: always
+        ports:
+            - 9000:9000
+            - 8000:8000
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - portainer-volume:/data
