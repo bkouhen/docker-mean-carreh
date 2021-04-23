@@ -4,9 +4,9 @@ COPY package*.json ./
 RUN npm install \
     && npm cache clean --force
 COPY ./ ./
-RUN npm run build
+RUN npm run build_prod
 
-FROM nginx:1.19.0
+FROM nginx:1.19.10
 COPY ./nginx/nginx.conf.template /etc/nginx/nginx.conf.template
 COPY ./nginx/docker-entrypoint.sh /
 COPY --from=builder /app/dist/client /usr/share/nginx/html

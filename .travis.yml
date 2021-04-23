@@ -16,12 +16,12 @@ script:
   - docker image build -t bkouhen/docker-mean-client ./client
   - docker image build -t bkouhen/docker-mean-api ./backend
   - docker image build -t bkouhen/docker-mean-nginx ./nginx
-  - docker image build -t bkouhen/docker-mean-syslog ./syslog
+  # - docker image build -t bkouhen/docker-mean-syslog ./syslog
   - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push bkouhen/docker-mean-client
   - docker push bkouhen/docker-mean-api
   - docker push bkouhen/docker-mean-nginx
-  - docker push bkouhen/docker-mean-syslog
+  # - docker push bkouhen/docker-mean-syslog
 
 # deploy:
 #     provider: codedeploy

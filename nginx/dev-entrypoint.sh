@@ -2,6 +2,8 @@
 # Create self signed Openssl certificate so Nginx can start before having any real certificate
 set -eu
 
+echo "----- Development Mode -----";
+
 # Check if folders are available
 if [[ ! -f /etc/nginx/certs/self.crt ]]; then
     mkdir -p /etc/nginx/certs && echo "Certs folder created in /etc/nginx";

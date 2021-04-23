@@ -4,7 +4,7 @@ worker_processes  auto;
 events {
     # How many connections each process can accept
     # max_concurrent_connections = worker_processes*worker_connections
-    worker_connections  1024;
+    worker_connections 1024;
 }
 
 http {
@@ -14,7 +14,7 @@ http {
                       '"$http_user_agent" "$http_x_forwarded_for"';
 
     access_log  /var/log/nginx/access.log  main;
-
+    
     # Handle Mime Types
     include mime.types;
 
@@ -37,7 +37,7 @@ http {
 
     # Buffer size for POST submissions
     client_body_buffer_size 10k;
-    client_max_body_size 8m;
+    client_max_body_size 1m;
 
     # Buffer size for Headers
     client_header_buffer_size 1k;
@@ -63,23 +63,21 @@ http {
     server {
         server_name ${NGINX_SERVER_NAME};
         listen ${NGINX_PORT};
+        listen [::]:80;
 
         location /.well-known/acme-challenge/ {
             root /var/www/certbot;
         }
-        
-        return 301 https://$host$request_uri;
-    }
+
+        # return 301 https://$host$request_uri;
+    }   
 
     server {
         #Server configuration
         server_name ${NGINX_SERVER_NAME};
         listen ${NGINX_TLS_PORT} ssl http2;
-
-        if ($scheme = http) {
-            return 301 https://$host$request_uri;
-        }
-
+        listen [::]:443 ssl ipv6only=on;
+        
         # Managed by Certbot
         ssl_certificate /etc/nginx/certs/fullchain.pem;
         ssl_certificate_key /etc/nginx/certs/privkey.pem;
@@ -205,8 +203,8 @@ http {
 
          
         location ~* \/portainer\/\w*\.(js|css)$ {
-            auth_basic "Secure Area";
-            auth_basic_user_file /etc/nginx/certs/.htpasswd;
+            # auth_basic "Secure Area";
+            # auth_basic_user_file /etc/nginx/certs/.htpasswd;
             
             proxy_http_version 1.1;
             proxy_set_header Host $host;
@@ -214,9 +212,7 @@ http {
             proxy_pass http://portainer;
         }
 
+         
     }
 
 }
-
-
-

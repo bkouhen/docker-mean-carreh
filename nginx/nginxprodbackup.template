@@ -4,7 +4,7 @@ worker_processes  auto;
 events {
     # How many connections each process can accept
     # max_concurrent_connections = worker_processes*worker_connections
-    worker_connections 1024;
+    worker_connections  1024;
 }
 
 http {
@@ -14,7 +14,7 @@ http {
                       '"$http_user_agent" "$http_x_forwarded_for"';
 
     access_log  /var/log/nginx/access.log  main;
-    
+
     # Handle Mime Types
     include mime.types;
 
@@ -37,7 +37,7 @@ http {
 
     # Buffer size for POST submissions
     client_body_buffer_size 10k;
-    client_max_body_size 1m;
+    client_max_body_size 8m;
 
     # Buffer size for Headers
     client_header_buffer_size 1k;
@@ -61,33 +61,41 @@ http {
     }
 
     server {
-        server_name ${NGINX_WWW_SERVER_NAME};
+        server_name ${NGINX_SERVER_NAME};
         listen ${NGINX_PORT};
-        listen ${NGINX_TLS_PORT} ssl;
 
-        # Self signed certificate
-        ssl_certificate /etc/nginx/certs/self.crt;
-        ssl_certificate_key /etc/nginx/certs/self.key;
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+        }
 
         return 301 https://$host$request_uri;
-    }   
+        
+    }
 
     server {
         #Server configuration
         server_name ${NGINX_SERVER_NAME};
-        listen ${NGINX_PORT};
-        listen ${NGINX_TLS_PORT} ssl http2;
+        listen 443 ssl http2;
 
         if ($scheme = http) {
             return 301 https://$host$request_uri;
         }
-        
-        # Self signed certificate
-        ssl_certificate /etc/nginx/certs/self.crt;
-        ssl_certificate_key /etc/nginx/certs/self.key;
 
-        # Enable HSTS
+        # Managed by Certbot
+        ssl_certificate /etc/nginx/certs/fullchain.pem;
+        ssl_certificate_key /etc/nginx/certs/privkey.pem;
+        include /etc/nginx/ssl-options/options-ssl-nginx.conf;
+        ssl_dhparam /etc/nginx/ssl-options/ssl-dhparams.pem;
+
+        # Enable Security Headers
         add_header Strict-Transport-Security "max-age=31536000" always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Frame-Options "DENY" always;
+
+        # Enable Content Security Policy
+        #add_header Content-Security-Policy "frame src 'self'; default-src 'self'; script-src 'self'" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 
         #Rate Limiting (per request)
         #limit_req zone=MYZONE burst=5 nodelay;
@@ -197,17 +205,13 @@ http {
          }
 
          
-        location ~* \/portainer\/\w*\.(js|css)$ {
-            # auth_basic "Secure Area";
-            # auth_basic_user_file /etc/nginx/certs/.htpasswd;
-            
+        location ~* \/portainer\/\w*\.(js|css)$ {            
             proxy_http_version 1.1;
             proxy_set_header Host $host;
             proxy_set_header Connection "";
             proxy_pass http://portainer;
         }
 
-         
     }
 
 }

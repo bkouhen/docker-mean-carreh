@@ -1,6 +1,6 @@
-FROM nginx:1.19.0
+FROM nginx:1.19.10
 
-RUN apt-get update && apt-get install -y certbot python-certbot-nginx inotify-tools procps apache2-utils
+RUN apt-get update && apt-get install -y inotify-tools procps apache2-utils certbot python-certbot-nginx 
 
 WORKDIR /docker
 
